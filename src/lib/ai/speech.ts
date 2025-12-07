@@ -222,9 +222,9 @@ export async function getPronunciationFeedback(
   }>
 }> {
   // Convert Buffer to ArrayBuffer if needed
-  const arrayBuffer = audioBuffer instanceof ArrayBuffer 
+  const arrayBuffer: ArrayBuffer = audioBuffer instanceof ArrayBuffer 
     ? audioBuffer 
-    : audioBuffer.buffer.slice(audioBuffer.byteOffset, audioBuffer.byteOffset + audioBuffer.byteLength)
+    : audioBuffer.buffer.slice(audioBuffer.byteOffset, audioBuffer.byteOffset + audioBuffer.byteLength) as ArrayBuffer
   
   return analyzePronunciation(arrayBuffer, expectedText)
 }
