@@ -57,41 +57,15 @@ export function Sidebar({ user }: SidebarProps) {
 
   return (
     <>
-      {/* Mobile Menu Button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed top-4 left-4 z-50 lg:hidden"
-        onClick={toggleSidebar}
-      >
-        {isSidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-      </Button>
-
-      {/* Mobile Overlay */}
-      <AnimatePresence>
-        {isSidebarOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-            onClick={toggleSidebar}
-          />
-        )}
-      </AnimatePresence>
-
       {/* Sidebar */}
       <motion.aside
         initial={false}
         animate={{
           width: isSidebarOpen ? 280 : 80,
-          x: typeof window !== "undefined" && window.innerWidth < 1024 
-            ? isSidebarOpen ? 0 : -280 
-            : 0,
         }}
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen",
-          "flex flex-col border-r border-white/10",
+          "fixed left-0 top-0 z-40 h-screen hidden lg:flex",
+          "flex-col border-r border-white/10",
           "bg-background/80 backdrop-blur-xl",
           "transition-all duration-300",
         )}

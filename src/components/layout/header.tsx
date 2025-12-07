@@ -25,7 +25,7 @@ export function Header({ title, subtitle }: HeaderProps) {
     >
       <div className="flex h-full items-center justify-between px-4 lg:px-6">
         {/* Left side - Title */}
-        <div className="flex items-center gap-4 pl-12 lg:pl-0">
+        <div className="flex items-center gap-4 lg:pl-0">
           {title && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}

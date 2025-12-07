@@ -1,5 +1,5 @@
 import { Sidebar } from "@/components/layout/sidebar"
-import { Header } from "@/components/layout/header"
+import { MobileNav } from "@/components/layout/mobile-nav"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
@@ -25,9 +25,10 @@ export default async function DashboardLayout({
           streak: (session.user as any).streak || 0,
         }}
       />
-      <div className="lg:pl-[280px] transition-all duration-300">
+      <div className="lg:pl-[280px] pb-16 lg:pb-0 transition-all duration-300">
         {children}
       </div>
+      <MobileNav />
     </div>
   )
 }
