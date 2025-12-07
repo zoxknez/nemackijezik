@@ -36,6 +36,60 @@ async function main() {
 
   console.log("✅ Demo user created:", demoUser.email)
 
+  // Create additional demo users
+  const demoUser2 = await prisma.user.upsert({
+    where: { email: "marko@demo.rs" },
+    update: { emailVerified: new Date() },
+    create: {
+      email: "marko@demo.rs",
+      name: "Marko Petrović",
+      password: hashedPassword,
+      currentLevel: Level.A2,
+      xpPoints: 1250,
+      streak: 12,
+      longestStreak: 15,
+      dailyGoal: 45,
+      soundEnabled: true,
+      emailVerified: new Date(),
+    },
+  })
+
+  const demoUser3 = await prisma.user.upsert({
+    where: { email: "ana@demo.rs" },
+    update: { emailVerified: new Date() },
+    create: {
+      email: "ana@demo.rs",
+      name: "Ana Jovanović",
+      password: hashedPassword,
+      currentLevel: Level.B1,
+      xpPoints: 3500,
+      streak: 25,
+      longestStreak: 30,
+      dailyGoal: 60,
+      soundEnabled: true,
+      emailVerified: new Date(),
+    },
+  })
+
+  const demoUser4 = await prisma.user.upsert({
+    where: { email: "test@test.com" },
+    update: { emailVerified: new Date() },
+    create: {
+      email: "test@test.com",
+      name: "Test User",
+      password: hashedPassword,
+      currentLevel: Level.A1,
+      xpPoints: 0,
+      streak: 0,
+      longestStreak: 0,
+      dailyGoal: 30,
+      soundEnabled: true,
+      emailVerified: new Date(),
+    },
+  })
+
+  console.log("✅ Additional demo users created:", demoUser2.email, demoUser3.email, demoUser4.email)
+
   // Create units first
   const unit1 = await prisma.unit.upsert({
     where: { level_order: { level: Level.A1, order: 1 } },
