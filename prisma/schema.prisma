@@ -1,0 +1,399 @@
+// ===== DEUTSCH MEISTER - DATABASE SCHEMA =====
+// German Language Learning Platform for Serbian Speakers
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ===== AUTHENTICATION & USERS =====
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Profile & Learning
+  nativeLanguage String   @default("sr")
+  currentLevel   Level    @default(A1)
+  xpPoints       Int      @default(0)
+  streak         Int      @default(0)
+  longestStreak  Int      @default(0)
+  lastActiveAt   DateTime?
+  dailyGoal      Int      @default(50)
+  timezone       String   @default("Europe/Belgrade")
+
+  // Preferences
+  soundEnabled    Boolean @default(true)
+  notifyEmail     Boolean @default(true)
+  notifyPush      Boolean @default(true)
+  darkMode        Boolean @default(false)
+
+  // Relations
+  accounts        Account[]
+  sessions        Session[]
+  progress        UserProgress[]
+  vocabulary      UserVocabulary[]
+  achievements    UserAchievement[]
+  studySessions   StudySession[]
+  streakHistory   StreakHistory[]
+
+  @@index([email])
+  @@index([currentLevel])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ===== LEARNING CONTENT =====
+
+enum Level {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+
+enum Category {
+  GRAMMAR
+  VOCABULARY
+  READING
+  LISTENING
+  SPEAKING
+  WRITING
+  CULTURE
+  PRONUNCIATION
+}
+
+model Lesson {
+  id          String   @id @default(cuid())
+  title       String
+  titleDe     String
+  description String   @db.Text
+  level       Level
+  category    Category
+  order       Int
+  duration    Int      @default(15)
+  xpReward    Int      @default(50)
+  isPublished Boolean  @default(false)
+  isPremium   Boolean  @default(false)
+  imageUrl    String?
+  videoUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  content     Json
+
+  exercises   Exercise[]
+  vocabulary  Vocabulary[]
+  progress    UserProgress[]
+  unit        Unit?        @relation(fields: [unitId], references: [id])
+  unitId      String?
+
+  @@unique([level, category, order])
+  @@index([level, category])
+  @@index([isPublished])
+}
+
+model Unit {
+  id          String   @id @default(cuid())
+  title       String
+  titleDe     String
+  description String   @db.Text
+  level       Level
+  order       Int
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+
+  lessons     Lesson[]
+
+  @@unique([level, order])
+  @@index([level])
+}
+
+// ===== EXERCISES =====
+
+enum ExerciseType {
+  MULTIPLE_CHOICE
+  FILL_BLANK
+  MATCHING
+  DRAG_DROP
+  TRANSLATION_SR_DE
+  TRANSLATION_DE_SR
+  LISTENING
+  SPEAKING
+  WRITING
+  WORD_ORDER
+  CONJUGATION
+  DECLENSION
+  ARTICLE_GENDER
+}
+
+model Exercise {
+  id            String       @id @default(cuid())
+  lessonId      String
+  type          ExerciseType
+  order         Int
+  question      String       @db.Text
+  questionDe    String?      @db.Text
+  instruction   String?
+  options       Json?
+  correctAnswer String       @db.Text
+  alternatives  String[]
+  audioUrl      String?
+  imageUrl      String?
+  points        Int          @default(10)
+  difficulty    Int          @default(1)
+  timeLimit     Int?
+  explanation   String?      @db.Text
+  explanationDe String?      @db.Text
+  hint          String?
+  createdAt     DateTime     @default(now())
+
+  lesson        Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  attempts      ExerciseAttempt[]
+
+  @@index([lessonId, order])
+  @@index([type])
+}
+
+model ExerciseAttempt {
+  id          String   @id @default(cuid())
+  sessionId   String
+  exerciseId  String
+  answer      String   @db.Text
+  isCorrect   Boolean
+  timeSpent   Int
+  attempts    Int      @default(1)
+  hintUsed    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  session     StudySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exercise    Exercise     @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([exerciseId])
+}
+
+// ===== VOCABULARY =====
+
+enum PartOfSpeech {
+  NOUN
+  VERB
+  ADJECTIVE
+  ADVERB
+  PRONOUN
+  PREPOSITION
+  CONJUNCTION
+  ARTICLE
+  INTERJECTION
+  NUMERAL
+  PHRASE
+}
+
+enum Gender {
+  MASCULINE
+  FEMININE
+  NEUTER
+  NONE
+}
+
+model Vocabulary {
+  id            String       @id @default(cuid())
+  word          String
+  translation   String
+  partOfSpeech  PartOfSpeech
+  gender        Gender?
+  plural        String?
+  pastTense     String?
+  pastParticiple String?
+  auxiliary     String?
+  example       String       @db.Text
+  exampleTrans  String       @db.Text
+  phonetic      String?
+  audioUrl      String?
+  level         Level
+  category      String?
+  tags          String[]
+  frequency     Int          @default(5000)
+  imageUrl      String?
+  createdAt     DateTime     @default(now())
+
+  lesson        Lesson?      @relation(fields: [lessonId], references: [id])
+  lessonId      String?
+  userVocab     UserVocabulary[]
+
+  @@unique([word, partOfSpeech])
+  @@index([level])
+  @@index([partOfSpeech])
+  @@index([category])
+}
+
+// ===== SPACED REPETITION SYSTEM (SRS) =====
+
+model UserVocabulary {
+  id           String     @id @default(cuid())
+  userId       String
+  vocabularyId String
+  easeFactor   Float      @default(2.5)
+  interval     Int        @default(0)
+  repetitions  Int        @default(0)
+  nextReview   DateTime   @default(now())
+  lastReview   DateTime?
+  isLearning   Boolean    @default(true)
+  isMastered   Boolean    @default(false)
+  totalReviews Int        @default(0)
+  correctCount Int        @default(0)
+  createdAt    DateTime   @default(now())
+
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vocabulary   Vocabulary @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, vocabularyId])
+  @@index([userId, nextReview])
+  @@index([userId, isLearning])
+}
+
+// ===== USER PROGRESS =====
+
+model UserProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  lessonId    String
+  started     Boolean  @default(true)
+  completed   Boolean  @default(false)
+  score       Int      @default(0)
+  bestScore   Int      @default(0)
+  attempts    Int      @default(0)
+  timeSpent   Int      @default(0)
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId, completed])
+}
+
+model StudySession {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+  xpEarned    Int      @default(0)
+  duration    Int      @default(0)
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attempts    ExerciseAttempt[]
+
+  @@index([userId, startedAt])
+}
+
+// ===== GAMIFICATION =====
+
+model Achievement {
+  id          String   @id @default(cuid())
+  name        String
+  nameDe      String
+  description String   @db.Text
+  icon        String
+  category    String
+  condition   Json
+  xpReward    Int      @default(0)
+  badge       String?
+  isSecret    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  users       UserAchievement[]
+
+  @@unique([name])
+}
+
+model UserAchievement {
+  id            String      @id @default(cuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime    @default(now())
+  notified      Boolean     @default(false)
+
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+}
+
+model StreakHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @db.Date
+  xpEarned  Int      @default(0)
+  goalMet   Boolean  @default(false)
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId, date])
+}
+
+model LeaderboardEntry {
+  id        String   @id @default(cuid())
+  odUserId    String
+  period    String
+  periodKey String
+  xpPoints  Int      @default(0)
+  rank      Int?
+  updatedAt DateTime @updatedAt
+
+  @@unique([odUserId, period, periodKey])
+  @@index([period, periodKey, xpPoints])
+}

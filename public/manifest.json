@@ -1,0 +1,105 @@
+{
+  "name": "DeutschMaster - Učenje Nemačkog",
+  "short_name": "DeutschMaster",
+  "description": "Najnaprednija aplikacija za učenje nemačkog jezika za srpske govornike. Od A1 do C2 sa AI tutorom.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#FFCE00",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "sr",
+  "dir": "ltr",
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "DeutschMaster Dashboard"
+    },
+    {
+      "src": "/screenshots/lesson.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Lekcija u toku"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nastavi učenje",
+      "short_name": "Nastavi",
+      "description": "Nastavi gde si stao",
+      "url": "/dashboard",
+      "icons": [{ "src": "/icons/shortcut-learn.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Ponovi vokabular",
+      "short_name": "Vokabular",
+      "description": "Vežbaj reči za ponavljanje",
+      "url": "/vokabular/ponavljanje",
+      "icons": [{ "src": "/icons/shortcut-vocab.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "AI Tutor",
+      "short_name": "AI Tutor",
+      "description": "Razgovaraj sa AI tutorom",
+      "url": "/ai-tutor",
+      "icons": [{ "src": "/icons/shortcut-ai.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

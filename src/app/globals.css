@@ -1,26 +1,338 @@
 @import "tailwindcss";
 
+/* ===== CUSTOM DESIGN SYSTEM - DEUTSCH MEISTER ===== */
+/* DARK MODE ONLY - This is a modern dark-themed learning app */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* German Flag Colors */
+  --german-black: #000000;
+  --german-red: #dc2626;
+  --german-gold: #eab308;
+  
+  /* Primary Colors */
+  --primary: #dc2626;
+  --primary-hover: #b91c1c;
+  --primary-foreground: #ffffff;
+  
+  /* Secondary - Gold/Yellow */
+  --secondary: #eab308;
+  --secondary-hover: #ca8a04;
+  --secondary-foreground: #000000;
+  
+  /* Accent - Deep Blue */
+  --accent: #1e40af;
+  --accent-hover: #1e3a8a;
+  --accent-foreground: #ffffff;
+  
+  /* Dark Theme Colors - ALWAYS DARK */
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --border: #334155;
+  --input: #334155;
+  --ring: #eab308;
+  
+  /* Muted */
+  --muted: #334155;
+  --muted-foreground: #94a3b8;
+  
+  /* Success/Error */
+  --success: #22c55e;
+  --success-foreground: #ffffff;
+  --error: #ef4444;
+  --error-foreground: #ffffff;
+  
+  /* Level Colors - CEFR */
+  --level-a1: #22c55e;
+  --level-a2: #84cc16;
+  --level-b1: #eab308;
+  --level-b2: #f97316;
+  --level-c1: #ef4444;
+  --level-c2: #dc2626;
+  
+  /* Border Radius */
+  --radius: 0.75rem;
 }
 
+/* Tailwind CSS 4 Theme Configuration */
 @theme inline {
+  /* German Flag Colors */
+  --color-german-black: var(--german-black);
+  --color-german-red: var(--german-red);
+  --color-german-gold: var(--german-gold);
+  
+  /* Core Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  /* Level Colors */
+  --color-level-a1: var(--level-a1);
+  --color-level-a2: var(--level-a2);
+  --color-level-b1: var(--level-b1);
+  --color-level-b2: var(--level-b2);
+  --color-level-c1: var(--level-c1);
+  --color-level-c2: var(--level-c2);
+  
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== SCROLLBAR CUSTOM ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
+}
+
+/* ===== GLASSMORPHISM EFFECTS ===== */
+.glass-effect {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-effect-light {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, 
+    rgba(220, 38, 38, 0.3) 0%, 
+    rgba(234, 179, 8, 0.2) 50%, 
+    rgba(30, 64, 175, 0.3) 100%);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.glow-effect:hover::before {
+  opacity: 1;
+}
+
+/* ===== 3D CANVAS STYLES ===== */
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-container canvas {
+  touch-action: none;
+}
+
+/* ===== GLOW EFFECTS ===== */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.3),
+              0 0 40px rgba(220, 38, 38, 0.2),
+              0 0 60px rgba(220, 38, 38, 0.1);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.3),
+              0 0 40px rgba(234, 179, 8, 0.2),
+              0 0 60px rgba(234, 179, 8, 0.1);
+}
+
+.glow-success {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3),
+              0 0 40px rgba(34, 197, 94, 0.2),
+              0 0 60px rgba(34, 197, 94, 0.1);
+}
+
+/* ===== GRADIENT TEXT ===== */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #eab308 50%, #dc2626 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
+}
+
+.gradient-text-german {
+  background: linear-gradient(135deg, #ffffff 0%, #dc2626 50%, #eab308 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-word {
+  0%, 100% { 
+    transform: translate(0, 0) rotate(0deg); 
+    opacity: inherit;
+  }
+  25% { 
+    transform: translate(10px, -15px) rotate(2deg); 
+  }
+  50% { 
+    transform: translate(-5px, -25px) rotate(-1deg); 
+  }
+  75% { 
+    transform: translate(15px, -10px) rotate(1deg); 
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-word {
+  animation: float-word 20s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+}
+
+/* Animation delays */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* ===== GLASS MORPHISM ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== LEVEL BADGES ===== */
+.badge-a1 { background: var(--level-a1); color: white; }
+.badge-a2 { background: var(--level-a2); color: white; }
+.badge-b1 { background: var(--level-b1); color: black; }
+.badge-b2 { background: var(--level-b2); color: white; }
+.badge-c1 { background: var(--level-c1); color: white; }
+.badge-c2 { background: var(--level-c2); color: white; }
+
+/* ===== SELECTION ===== */
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* ===== FOCUS STYLES ===== */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
