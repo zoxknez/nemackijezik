@@ -203,3 +203,28 @@ export async function getAvailableVoices(): Promise<
     return []
   }
 }
+
+/**
+ * Get pronunciation feedback for audio against expected text
+ * Used by the API route
+ */
+export async function getPronunciationFeedback(
+  audioBuffer: Buffer | ArrayBuffer,
+  expectedText: string
+): Promise<{
+  transcript: string
+  score: number
+  feedback: string
+  wordScores?: Array<{
+    word: string
+    expected: string
+    score: number
+  }>
+}> {
+  // Convert Buffer to ArrayBuffer if needed
+  const arrayBuffer = audioBuffer instanceof ArrayBuffer 
+    ? audioBuffer 
+    : audioBuffer.buffer.slice(audioBuffer.byteOffset, audioBuffer.byteOffset + audioBuffer.byteLength)
+  
+  return analyzePronunciation(arrayBuffer, expectedText)
+}

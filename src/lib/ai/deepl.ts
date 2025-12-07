@@ -144,3 +144,50 @@ export async function getDeepLUsage(): Promise<{
     throw new Error("Greška pri dobijanju statistike")
   }
 }
+
+/**
+ * Translate text with flexible language options
+ * Used by the API route
+ */
+export async function translateText(
+  text: string,
+  from?: string,
+  to?: string
+): Promise<string> {
+  const targetLang = (to?.toUpperCase() === "DE" ? "DE" : "SR") as "DE" | "SR"
+  const sourceLang = from?.toUpperCase() as "DE" | "SR" | undefined
+  const result = await translate(text, targetLang, sourceLang)
+  return result.text
+}
+
+/**
+ * Batch translate multiple texts
+ * Used by the API route
+ */
+export async function translateBatch(
+  texts: string[],
+  from?: string,
+  to?: string
+): Promise<string[]> {
+  const targetLang = (to?.toUpperCase() === "DE" ? "DE" : "SR") as "DE" | "SR"
+  const sourceLang = from?.toUpperCase() as "DE" | "SR" | undefined
+  
+  const results = await Promise.all(
+    texts.map((text) => translate(text, targetLang, sourceLang))
+  )
+  return results.map((r) => r.text)
+}
+
+/**
+ * Detect language of text
+ * Uses DeepL's detection via a translation request
+ */
+export async function detectLanguage(text: string): Promise<string> {
+  try {
+    // DeepL detects language during translation
+    const result = await translate(text, "DE")
+    return result.detectedSourceLanguage || "unknown"
+  } catch {
+    return "unknown"
+  }
+}
