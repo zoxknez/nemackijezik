@@ -294,32 +294,32 @@ export default async function DashboardPage() {
 
               {/* Recommended Lessons */}
               <div>
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                    <Brain className="h-5 w-5 text-purple-400" />
+                <div className="mb-3 sm:mb-4 flex items-center justify-between">
+                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                    <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />
                     Preporučeno za tebe
                   </h3>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="space-y-3 sm:space-y-0 sm:grid sm:gap-4 sm:grid-cols-2">
                   {recommendedLessons.map((lesson) => (
                     <GlassCard 
                       key={lesson.id}
-                      className="group p-4 transition-all hover:bg-white/10 cursor-pointer"
+                      className="group p-3 sm:p-4 transition-all hover:bg-white/10 cursor-pointer"
                     >
-                      <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center justify-between mb-2 sm:mb-3">
                         <LevelBadge level={lesson.level as Level} />
-                        <span className="text-xs text-muted-foreground">{lesson.time}</span>
+                        <span className="text-xs text-muted-foreground shrink-0">{lesson.time}</span>
                       </div>
-                      <h4 className="font-medium text-white group-hover:text-german-gold transition-colors">
+                      <h4 className="font-medium text-white text-sm sm:text-base group-hover:text-german-gold transition-colors">
                         {lesson.title}
                       </h4>
-                      <p className="text-xs text-german-gold/60 mb-3">{lesson.titleDe}</p>
+                      <p className="text-xs text-german-gold/60 mb-2 sm:mb-3">{lesson.titleDe}</p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-german-gold flex items-center gap-1">
                           <Zap className="h-3 w-3" />
                           +{lesson.xp} XP
                         </span>
-                        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-white group-hover:translate-x-1 transition-all" />
+                        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-white group-hover:translate-x-1 transition-all shrink-0" />
                       </div>
                     </GlassCard>
                   ))}
@@ -328,57 +328,60 @@ export default async function DashboardPage() {
 
               {/* Recent Lessons List */}
               <div>
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-white">Nedavne lekcije</h3>
-                  <Link href="/lekcije" className="text-sm text-german-gold hover:underline flex items-center gap-1">
+                <div className="mb-3 sm:mb-4 flex items-center justify-between">
+                  <h3 className="text-base sm:text-lg font-bold text-white">Nedavne lekcije</h3>
+                  <Link href="/lekcije" className="text-xs sm:text-sm text-german-gold hover:underline flex items-center gap-1 shrink-0">
                     Vidi sve
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
                   </Link>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {mockLessons.map((lesson) => (
-                    <GlassCard key={lesson.id} className="group flex items-center justify-between p-4 transition-all hover:bg-white/10 hover:translate-x-1">
-                      <div className="flex items-center gap-4">
-                        <div className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                    <GlassCard key={lesson.id} className="group p-3 sm:p-4 transition-all hover:bg-white/10">
+                      <div className="flex items-center gap-3">
+                        <div className={`flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full ${
                           lesson.progress === 100 ? 'bg-green-500/20 text-green-400' : 'bg-white/5 text-muted-foreground'
                         }`}>
-                          {lesson.progress === 100 ? <CheckCircle2 className="h-5 w-5" /> : <Play className="h-4 w-4 ml-0.5" />}
+                          {lesson.progress === 100 ? <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5" /> : <Play className="h-3 w-3 sm:h-4 sm:w-4 ml-0.5" />}
                         </div>
-                        <div>
-                          <h4 className="font-medium text-white group-hover:text-german-gold transition-colors">{lesson.title}</h4>
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <span className="text-german-gold/60">{lesson.titleDe}</span>
-                            <span>•</span>
-                            <LevelBadge level={lesson.level} className="scale-75 origin-left" />
-                            <span>•</span>
-                            <span>{lesson.xp} XP</span>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-medium text-white text-sm sm:text-base truncate group-hover:text-german-gold transition-colors">{lesson.title}</h4>
+                          <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-muted-foreground flex-wrap">
+                            <span className="text-german-gold/60 truncate max-w-[100px] sm:max-w-none">{lesson.titleDe}</span>
+                            <span className="hidden sm:inline">•</span>
+                            <LevelBadge level={lesson.level} className="scale-75 origin-left hidden sm:flex" />
+                            <span className="hidden sm:inline">•</span>
+                            <span className="shrink-0">{lesson.xp} XP</span>
                           </div>
+                        </div>
+                        
+                        {/* Progress or Button - simplified on mobile */}
+                        <div className="shrink-0">
+                          {lesson.progress < 100 && lesson.progress > 0 && (
+                            <div className="flex items-center gap-2">
+                              <div className="h-1.5 w-12 sm:w-24 rounded-full bg-white/5">
+                                <div 
+                                  className="h-full rounded-full bg-german-gold"
+                                  style={{ width: `${lesson.progress}%` }}
+                                />
+                              </div>
+                              <span className="text-[10px] sm:text-xs font-medium text-muted-foreground">{lesson.progress}%</span>
+                            </div>
+                          )}
+                          
+                          {lesson.progress === 100 && (
+                            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-white h-7 sm:h-8 text-xs px-2 sm:px-3">
+                              Ponovi
+                            </Button>
+                          )}
+                          
+                          {lesson.progress === 0 && (
+                            <Button size="sm" className="bg-german-gold/20 text-german-gold hover:bg-german-gold/30 h-7 sm:h-8 text-xs px-2 sm:px-3">
+                              Započni
+                            </Button>
+                          )}
                         </div>
                       </div>
-                      
-                      {lesson.progress < 100 && lesson.progress > 0 && (
-                        <div className="flex items-center gap-3">
-                          <div className="h-1.5 w-24 rounded-full bg-white/5">
-                            <div 
-                              className="h-full rounded-full bg-german-gold"
-                              style={{ width: `${lesson.progress}%` }}
-                            />
-                          </div>
-                          <span className="text-xs font-medium text-muted-foreground">{lesson.progress}%</span>
-                        </div>
-                      )}
-                      
-                      {lesson.progress === 100 && (
-                        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-white">
-                          Ponovi
-                        </Button>
-                      )}
-                      
-                      {lesson.progress === 0 && (
-                        <Button size="sm" className="bg-german-gold/20 text-german-gold hover:bg-german-gold/30">
-                          Započni
-                        </Button>
-                      )}
                     </GlassCard>
                   ))}
                 </div>
@@ -386,25 +389,25 @@ export default async function DashboardPage() {
 
               {/* Skills Progress */}
               <div>
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                    <BarChart3 className="h-5 w-5 text-blue-400" />
+                <div className="mb-3 sm:mb-4 flex items-center justify-between">
+                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                    <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />
                     Napredak veština
                   </h3>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid grid-cols-2 gap-2 sm:gap-4">
                   {skillProgress.map((skill) => (
-                    <GlassCard key={skill.name} className="p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <skill.icon className={`h-5 w-5 ${skill.color}`} />
-                          <span className="font-medium text-white">{skill.name}</span>
+                    <GlassCard key={skill.name} className="p-3 sm:p-4">
+                      <div className="flex items-center justify-between mb-2 sm:mb-3">
+                        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                          <skill.icon className={`h-4 w-4 sm:h-5 sm:w-5 shrink-0 ${skill.color}`} />
+                          <span className="font-medium text-white text-xs sm:text-sm truncate">{skill.name}</span>
                         </div>
-                        <span className="text-sm text-german-gold">Nivo {skill.level}</span>
+                        <span className="text-[10px] sm:text-sm text-german-gold shrink-0 ml-1">Nv. {skill.level}</span>
                       </div>
-                      <Progress value={skill.progress} className="h-2" />
-                      <p className="text-xs text-muted-foreground mt-2">
-                        {skill.progress}% do nivoa {skill.level + 1}
+                      <Progress value={skill.progress} className="h-1.5 sm:h-2" />
+                      <p className="text-[10px] sm:text-xs text-muted-foreground mt-1.5 sm:mt-2">
+                        {skill.progress}% do nv. {skill.level + 1}
                       </p>
                     </GlassCard>
                   ))}
@@ -413,18 +416,18 @@ export default async function DashboardPage() {
             </div>
 
             {/* Right Column - Stats & Quick Actions */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Daily Goal */}
-              <GlassCard className="p-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="font-bold text-white">Dnevni cilj</h3>
-                  <Target className="h-5 w-5 text-german-gold" />
+              <GlassCard className="p-4 sm:p-6">
+                <div className="mb-3 sm:mb-4 flex items-center justify-between">
+                  <h3 className="font-bold text-white text-sm sm:text-base">Dnevni cilj</h3>
+                  <Target className="h-4 w-4 sm:h-5 sm:w-5 text-german-gold" />
                 </div>
                 
-                <div className="relative flex items-center justify-center py-4">
+                <div className="relative flex items-center justify-center py-2 sm:py-4">
                   {/* Circular Progress */}
-                  <div className="relative h-32 w-32">
-                    <svg className="h-full w-full -rotate-90 transform">
+                  <div className="relative h-24 w-24 sm:h-32 sm:w-32">
+                    <svg className="h-full w-full -rotate-90 transform" viewBox="0 0 128 128">
                       <circle
                         cx="64"
                         cy="64"
@@ -448,68 +451,68 @@ export default async function DashboardPage() {
                       />
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-3xl font-bold text-white">{userStats.todayXp}</span>
-                      <span className="text-xs text-muted-foreground">/ {userStats.dailyGoal} XP</span>
+                      <span className="text-2xl sm:text-3xl font-bold text-white">{userStats.todayXp}</span>
+                      <span className="text-[10px] sm:text-xs text-muted-foreground">/ {userStats.dailyGoal} XP</span>
                     </div>
                   </div>
                 </div>
                 
-                <p className="text-center text-sm text-muted-foreground">
+                <p className="text-center text-xs sm:text-sm text-muted-foreground">
                   {userStats.todayXp >= userStats.dailyGoal 
-                    ? "🎉 Odličan posao! Cilj dostignut!" 
+                    ? "🎉 Cilj dostignut!" 
                     : "Samo tako nastavi!"}
                 </p>
               </GlassCard>
 
               {/* Weekly Activity Chart */}
-              <GlassCard className="p-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="font-bold text-white">Nedeljni pregled</h3>
-                  <Calendar className="h-5 w-5 text-muted-foreground" />
+              <GlassCard className="p-4 sm:p-6">
+                <div className="mb-3 sm:mb-4 flex items-center justify-between">
+                  <h3 className="font-bold text-white text-sm sm:text-base">Nedeljni pregled</h3>
+                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
                 </div>
                 
-                <div className="flex items-end justify-between gap-2 h-24 mb-4">
+                <div className="flex items-end justify-between gap-1.5 sm:gap-2 h-20 sm:h-24 mb-3 sm:mb-4">
                   {weeklyActivity.map((day, i) => (
                     <div key={i} className="flex flex-col items-center gap-1 flex-1">
                       <div 
                         className={`w-full rounded-t transition-all ${day.completed ? 'bg-gradient-to-t from-german-gold to-german-gold/50' : 'bg-white/10'}`}
                         style={{ height: `${(day.xp / 100) * 100}%`, minHeight: '8px' }}
                       />
-                      <span className={`text-xs ${day.completed ? 'text-white' : 'text-muted-foreground'}`}>
+                      <span className={`text-[10px] sm:text-xs ${day.completed ? 'text-white' : 'text-muted-foreground'}`}>
                         {day.day}
                       </span>
                     </div>
                   ))}
                 </div>
                 
-                <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-xs sm:text-sm">
                   <span className="text-muted-foreground">Ove nedelje</span>
                   <span className="text-german-gold font-bold">{userStats.weeklyXp} XP</span>
                 </div>
               </GlassCard>
 
               {/* Recent Achievements */}
-              <GlassCard className="p-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="font-bold text-white">Nedavna dostignuća</h3>
-                  <Link href="/dostignuca" className="text-xs text-german-gold hover:underline">
+              <GlassCard className="p-4 sm:p-6">
+                <div className="mb-3 sm:mb-4 flex items-center justify-between">
+                  <h3 className="font-bold text-white text-sm sm:text-base">Nedavna dostignuća</h3>
+                  <Link href="/dostignuca" className="text-[10px] sm:text-xs text-german-gold hover:underline">
                     Vidi sva
                   </Link>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {recentAchievements.map((achievement) => (
-                    <div key={achievement.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors">
-                      <div className={`p-2 rounded-lg ${
+                    <div key={achievement.id} className="flex items-center gap-2 sm:gap-3 p-1.5 sm:p-2 rounded-lg hover:bg-white/5 transition-colors">
+                      <div className={`p-1.5 sm:p-2 rounded-lg shrink-0 ${
                         achievement.tier === 'gold' ? 'bg-yellow-500/20 text-yellow-400' :
                         achievement.tier === 'silver' ? 'bg-slate-400/20 text-slate-300' :
                         'bg-amber-600/20 text-amber-500'
                       }`}>
-                        <achievement.icon className="h-4 w-4" />
+                        <achievement.icon className="h-3 w-3 sm:h-4 sm:w-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-white truncate">{achievement.title}</p>
-                        <p className="text-xs text-muted-foreground">{achievement.date}</p>
+                        <p className="text-xs sm:text-sm font-medium text-white truncate">{achievement.title}</p>
+                        <p className="text-[10px] sm:text-xs text-muted-foreground">{achievement.date}</p>
                       </div>
                     </div>
                   ))}
@@ -517,86 +520,86 @@ export default async function DashboardPage() {
               </GlassCard>
 
               {/* Friends Leaderboard */}
-              <GlassCard className="p-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="font-bold text-white flex items-center gap-2">
-                    <Users className="h-4 w-4 text-blue-400" />
+              <GlassCard className="p-4 sm:p-6">
+                <div className="mb-3 sm:mb-4 flex items-center justify-between">
+                  <h3 className="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                    <Users className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400" />
                     Rang lista
                   </h3>
-                  <Crown className="h-5 w-5 text-german-gold" />
+                  <Crown className="h-4 w-4 sm:h-5 sm:w-5 text-german-gold" />
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {friendsLeaderboard.map((friend) => (
                     <div 
                       key={friend.rank}
-                      className={`flex items-center gap-3 p-2 rounded-lg ${
+                      className={`flex items-center gap-2 sm:gap-3 p-1.5 sm:p-2 rounded-lg ${
                         friend.isUser ? 'bg-german-gold/10 border border-german-gold/20' : 'hover:bg-white/5'
                       } transition-colors`}
                     >
-                      <span className="text-lg w-6 text-center">{friend.avatar}</span>
+                      <span className="text-base sm:text-lg w-5 sm:w-6 text-center shrink-0">{friend.avatar}</span>
                       <div className="flex-1 min-w-0">
-                        <p className={`text-sm font-medium truncate ${friend.isUser ? 'text-german-gold' : 'text-white'}`}>
+                        <p className={`text-xs sm:text-sm font-medium truncate ${friend.isUser ? 'text-german-gold' : 'text-white'}`}>
                           {friend.name}
                         </p>
-                        <p className="text-xs text-muted-foreground flex items-center gap-1">
-                          <Flame className="h-3 w-3 text-orange-400" />
+                        <p className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
+                          <Flame className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-orange-400" />
                           {friend.streak} dana
                         </p>
                       </div>
-                      <span className="text-sm font-bold text-white">{friend.xp} XP</span>
+                      <span className="text-xs sm:text-sm font-bold text-white shrink-0">{friend.xp} XP</span>
                     </div>
                   ))}
                 </div>
               </GlassCard>
 
               {/* AI Tutor Promo */}
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 p-6 text-white shadow-lg">
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/20 blur-2xl" />
-                <Sparkles className="mb-4 h-8 w-8 text-blue-200" />
-                <h3 className="mb-2 text-lg font-bold">Vežbaj razgovor</h3>
-                <p className="mb-4 text-sm text-blue-100">
+              <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 p-4 sm:p-6 text-white shadow-lg">
+                <div className="absolute -right-10 -top-10 h-24 w-24 sm:h-32 sm:w-32 rounded-full bg-white/20 blur-2xl" />
+                <Sparkles className="mb-2 sm:mb-4 h-6 w-6 sm:h-8 sm:w-8 text-blue-200" />
+                <h3 className="mb-1 sm:mb-2 text-base sm:text-lg font-bold">Vežbaj razgovor</h3>
+                <p className="mb-3 sm:mb-4 text-xs sm:text-sm text-blue-100">
                   Naš AI tutor je spreman za konverzaciju. Isprobaj nove scenarije!
                 </p>
                 <Link href="/chat">
-                  <Button className="w-full bg-white text-blue-600 hover:bg-blue-50">
-                    <MessageSquare className="mr-2 h-4 w-4" />
+                  <Button className="w-full bg-white text-blue-600 hover:bg-blue-50 h-9 sm:h-10 text-sm">
+                    <MessageSquare className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                     Započni Chat
                   </Button>
                 </Link>
               </div>
 
               {/* Quick Stats */}
-              <GlassCard className="p-6">
-                <h3 className="font-bold text-white mb-4">Brza statistika</h3>
-                <div className="space-y-3">
+              <GlassCard className="p-4 sm:p-6">
+                <h3 className="font-bold text-white text-sm sm:text-base mb-3 sm:mb-4">Brza statistika</h3>
+                <div className="space-y-2 sm:space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Clock className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">Ukupno vreme</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-muted-foreground shrink-0" />
+                      <span className="text-xs sm:text-sm text-muted-foreground">Ukupno vreme</span>
                     </div>
-                    <span className="text-sm font-bold text-white">{userStats.totalTime}</span>
+                    <span className="text-xs sm:text-sm font-bold text-white shrink-0">{userStats.totalTime}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-green-400" />
-                      <span className="text-sm text-muted-foreground">Završene lekcije</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-green-400 shrink-0" />
+                      <span className="text-xs sm:text-sm text-muted-foreground">Završene lekcije</span>
                     </div>
-                    <span className="text-sm font-bold text-white">{userStats.lessonsCompleted}</span>
+                    <span className="text-xs sm:text-sm font-bold text-white shrink-0">{userStats.lessonsCompleted}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="h-4 w-4 text-blue-400" />
-                      <span className="text-sm text-muted-foreground">Tačnost</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-blue-400 shrink-0" />
+                      <span className="text-xs sm:text-sm text-muted-foreground">Tačnost</span>
                     </div>
-                    <span className="text-sm font-bold text-white">{userStats.accuracy}%</span>
+                    <span className="text-xs sm:text-sm font-bold text-white shrink-0">{userStats.accuracy}%</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Award className="h-4 w-4 text-yellow-400" />
-                      <span className="text-sm text-muted-foreground">Globalni rang</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <Award className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 shrink-0" />
+                      <span className="text-xs sm:text-sm text-muted-foreground">Globalni rang</span>
                     </div>
-                    <span className="text-sm font-bold text-white">#{userStats.globalRank}</span>
+                    <span className="text-xs sm:text-sm font-bold text-white shrink-0">#{userStats.globalRank}</span>
                   </div>
                 </div>
               </GlassCard>
