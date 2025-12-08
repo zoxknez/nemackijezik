@@ -15,7 +15,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Sidebar - only visible on desktop (lg+) */}
       <Sidebar
         user={{
@@ -28,7 +28,7 @@ export default async function DashboardLayout({
       />
       
       {/* Main content */}
-      <main className="w-full min-h-screen pb-20 lg:pb-0 lg:pl-[280px]">
+      <main className="w-full min-h-screen pb-20 lg:pb-0 lg:pl-[280px] overflow-x-hidden">
         {children}
       </main>
       

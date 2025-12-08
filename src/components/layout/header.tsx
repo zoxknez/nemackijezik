@@ -24,8 +24,8 @@ export function Header({ title, subtitle, showGreeting, userName }: HeaderProps)
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/10 bg-background/80 backdrop-blur-xl">
-      <div className="flex h-14 sm:h-16 items-center justify-between px-4">
+    <header className="sticky top-0 z-30 border-b border-white/10 bg-background/80 backdrop-blur-xl w-full overflow-hidden">
+      <div className="flex h-14 sm:h-16 items-center justify-between px-3 sm:px-4">
         {/* Left side - Title or Greeting */}
         <div className="flex-1 min-w-0">
           {showGreeting && userName ? (
@@ -48,7 +48,7 @@ export function Header({ title, subtitle, showGreeting, userName }: HeaderProps)
         </div>
 
         {/* Right side - Actions (compact on mobile) */}
-        <div className="flex items-center gap-1 sm:gap-2 ml-2">
+        <div className="flex items-center gap-1 sm:gap-2 ml-2 shrink-0">
           {/* Theme Toggle */}
           <Button
             variant="ghost"
