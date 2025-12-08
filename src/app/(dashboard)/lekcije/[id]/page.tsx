@@ -23,6 +23,7 @@ import { LevelBadge } from "@/components/ui/badge"
 import Link from "next/link"
 import { lessons, type Exercise } from "@/data/lessons"
 import { cn } from "@/lib/utils"
+import { playSynthCorrect, playSynthWrong, playSynthClick } from "@/lib/sounds"
 
 export default function LessonPage() {
   const params = useParams()
@@ -41,6 +42,9 @@ export default function LessonPage() {
   const [xpEarned, setXpEarned] = useState(0)
   const [isCompleted, setIsCompleted] = useState(false)
   const [streak, setStreak] = useState(0)
+  
+  // New states for Learn/Flashcard
+  const [isFlipped, setIsFlipped] = useState(false)
   
   // Matching game state
   const [matchingPairs, setMatchingPairs] = useState<{id: string, text: string, type: 'de' | 'sr', matched: boolean}[]>([])
@@ -124,7 +128,10 @@ export default function LessonPage() {
   const checkAnswer = () => {
     let correct = false
     
-    if (exercise.type === "multiple-choice" || exercise.type === "listening") {
+    if (exercise.type === "learn-card" || exercise.type === "flashcard") {
+      // Learn cards and flashcards are always "correct" when user clicks continue
+      correct = true
+    } else if (exercise.type === "multiple-choice" || exercise.type === "listening" || exercise.type === "gender-game") {
       correct = selectedOption === exercise.correctAnswer
     } else if (exercise.type === "translation" || exercise.type === "fill-blank" || exercise.type === "vocabulary") {
       const answers = Array.isArray(exercise.correctAnswer) ? exercise.correctAnswer : [exercise.correctAnswer]
@@ -140,10 +147,12 @@ export default function LessonPage() {
     setShowResult(true)
 
     if (correct) {
+      playSynthCorrect()
       setStreak(s => s + 1)
       const bonus = streak >= 2 ? 5 : 0
       setXpEarned(xp => xp + 10 + bonus)
     } else {
+      playSynthWrong()
       setStreak(0)
       setLives(l => Math.max(0, l - 1))
     }
@@ -157,6 +166,7 @@ export default function LessonPage() {
       setShowResult(false)
       setShowHint(false)
       setSelectedMatch(null)
+      setIsFlipped(false)
     } else {
       setIsCompleted(true)
     }
@@ -280,6 +290,66 @@ export default function LessonPage() {
             <div className="flex-1">
               {!showResult && (
                 <div className="space-y-6">
+                  {/* Learn Card - New Teaching Component */}
+                  {exercise.type === "learn-card" && (
+                    <div className="flex flex-col items-center text-center space-y-8 py-4">
+                      <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className={cn(
+                          "w-48 h-48 rounded-full flex items-center justify-center mb-4 border-4 shadow-[0_0_30px_rgba(0,0,0,0.3)]",
+                          exercise.color === 'blue' ? 'bg-blue-500/20 text-blue-400 border-blue-500/50' : 
+                          exercise.color === 'red' ? 'bg-red-500/20 text-red-400 border-red-500/50' :
+                          exercise.color === 'green' ? 'bg-green-500/20 text-green-400 border-green-500/50' :
+                          'bg-german-gold/20 text-german-gold border-german-gold/50'
+                        )}
+                      >
+                        <Volume2 className="w-20 h-20 cursor-pointer hover:scale-110 transition-transform" 
+                          onClick={() => playAudio(exercise.audioText || exercise.questionDe || "")} 
+                        />
+                      </motion.div>
+                      
+                      <div className="space-y-2">
+                        <h3 className="text-3xl font-bold text-white">{exercise.questionDe}</h3>
+                        <p className="text-xl text-muted-foreground">{exercise.question}</p>
+                      </div>
+
+                      <div className="bg-white/5 p-6 rounded-xl border border-white/10 max-w-md">
+                        <p className="text-lg leading-relaxed">{exercise.explanation}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Flashcard - Interactive Learning */}
+                  {exercise.type === "flashcard" && (
+                    <div className="perspective-1000 h-[300px] w-full cursor-pointer" onClick={() => setIsFlipped(!isFlipped)}>
+                      <motion.div
+                        initial={false}
+                        animate={{ rotateY: isFlipped ? 180 : 0 }}
+                        transition={{ duration: 0.6, type: "spring" }}
+                        className="relative w-full h-full preserve-3d"
+                        style={{ transformStyle: "preserve-3d" }}
+                      >
+                        {/* Front */}
+                        <div className="absolute w-full h-full backface-hidden bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl flex flex-col items-center justify-center p-8 text-center" style={{ backfaceVisibility: "hidden" }}>
+                          <h3 className="text-3xl font-bold text-white mb-4">{exercise.questionDe}</h3>
+                          <p className="text-sm text-muted-foreground">(Klikni da okreneš)</p>
+                        </div>
+
+                        {/* Back */}
+                        <div className="absolute w-full h-full backface-hidden bg-gradient-to-br from-german-gold/20 to-orange-500/20 border border-german-gold/30 rounded-2xl flex flex-col items-center justify-center p-8 text-center" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+                          <h3 className="text-2xl font-bold text-white mb-2">{exercise.question}</h3>
+                          <p className="text-muted-foreground mb-4">{exercise.explanation}</p>
+                          {exercise.audioText && (
+                             <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); playAudio(exercise.audioText!); }}>
+                               <Volume2 className="w-6 h-6 text-german-gold" />
+                             </Button>
+                          )}
+                        </div>
+                      </motion.div>
+                    </div>
+                  )}
+
                   {/* Multiple Choice & Listening Options */}
                   {(exercise.type === "multiple-choice" || exercise.type === "listening") && exercise.options && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -298,6 +368,69 @@ export default function LessonPage() {
                           {option}
                         </Button>
                       ))}
+                    </div>
+                  )}
+
+                  {/* Gender Game - Color-coded buttons */}
+                  {exercise.type === "gender-game" && (
+                    <div className="space-y-6">
+                      <div className="text-center">
+                        <motion.h3 
+                          initial={{ scale: 0.8 }}
+                          animate={{ scale: 1 }}
+                          className="text-4xl font-bold text-white mb-2"
+                        >
+                          {exercise.questionDe}
+                        </motion.h3>
+                        <p className="text-muted-foreground">Izaberi tačan rod (član)</p>
+                      </div>
+                      
+                      <div className="grid grid-cols-3 gap-4">
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setSelectedOption("der")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 font-bold text-2xl transition-all",
+                            selectedOption === "der"
+                              ? "bg-blue-500 border-blue-400 text-white shadow-[0_0_30px_rgba(59,130,246,0.5)]"
+                              : "bg-blue-500/20 border-blue-500/30 text-blue-400 hover:bg-blue-500/30"
+                          )}
+                        >
+                          der
+                          <span className="block text-xs mt-1 font-normal opacity-70">muški</span>
+                        </motion.button>
+                        
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setSelectedOption("die")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 font-bold text-2xl transition-all",
+                            selectedOption === "die"
+                              ? "bg-red-500 border-red-400 text-white shadow-[0_0_30px_rgba(239,68,68,0.5)]"
+                              : "bg-red-500/20 border-red-500/30 text-red-400 hover:bg-red-500/30"
+                          )}
+                        >
+                          die
+                          <span className="block text-xs mt-1 font-normal opacity-70">ženski</span>
+                        </motion.button>
+                        
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => setSelectedOption("das")}
+                          className={cn(
+                            "p-6 rounded-2xl border-2 font-bold text-2xl transition-all",
+                            selectedOption === "das"
+                              ? "bg-green-500 border-green-400 text-white shadow-[0_0_30px_rgba(34,197,94,0.5)]"
+                              : "bg-green-500/20 border-green-500/30 text-green-400 hover:bg-green-500/30"
+                          )}
+                        >
+                          das
+                          <span className="block text-xs mt-1 font-normal opacity-70">srednji</span>
+                        </motion.button>
+                      </div>
                     </div>
                   )}
 
@@ -367,9 +500,12 @@ export default function LessonPage() {
                     <Button
                       className="w-full bg-german-gold text-black hover:bg-german-gold/90 font-bold text-lg h-12"
                       onClick={checkAnswer}
-                      disabled={!answer && !selectedOption}
+                      disabled={
+                        (exercise.type !== "learn-card" && exercise.type !== "flashcard") && 
+                        !answer && !selectedOption
+                      }
                     >
-                      Proveri
+                      {exercise.type === "learn-card" || exercise.type === "flashcard" ? "Dalje" : "Proveri"}
                     </Button>
                   )}
                 </div>
@@ -487,6 +623,14 @@ function CompletionScreen({ xp, lessonTitle }: { xp: number; lessonTitle: string
               <div className="flex items-center gap-2">
                 <Zap className="w-5 h-5 text-german-gold" />
                 <span className="font-bold text-white text-xl">+{xp}</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between p-4 bg-black/20 rounded-xl border border-white/5">
+              <span className="text-muted-foreground">Naučene reči</span>
+              <div className="flex items-center gap-2">
+                <Star className="w-5 h-5 text-blue-400" />
+                <span className="font-bold text-white text-xl">+5</span>
               </div>
             </div>
           </div>

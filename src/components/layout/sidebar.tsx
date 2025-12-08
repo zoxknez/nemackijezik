@@ -24,11 +24,13 @@ import {
   ChevronRight,
   Sparkles,
   MessageCircle,
+  Library,
 } from "lucide-react"
 
 const mainNavItems = [
   { href: "/dashboard", label: "Početna", icon: Home },
   { href: "/lekcije", label: "Lekcije", icon: BookOpen },
+  { href: "/recnik", label: "Rečnik", icon: Library },
   { href: "/vokabular", label: "Vokabular", icon: Languages },
   { href: "/vezbe", label: "Vežbe", icon: Dumbbell },
   { href: "/ai-tutor", label: "AI Tutor", icon: Sparkles },
