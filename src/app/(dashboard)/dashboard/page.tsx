@@ -111,15 +111,16 @@ export default async function DashboardPage() {
   return (
     <>
       <Header
-        title={`${greeting}, ${user?.name?.split(" ")[0] || "učeniče"}!`}
+        showGreeting
+        userName={user?.name?.split(" ")[0] || "učeniče"}
         subtitle="Nastavi gde si stao i osvoji današnji cilj"
       />
 
-      <main className="relative min-h-[calc(100vh-4rem)] p-4 lg:p-6">
+      <main className="relative min-h-[calc(100vh-4rem)] p-3 sm:p-4 lg:p-6">
         {/* Background */}
         <DashboardBackground />
 
-        <div className="relative z-10 mx-auto max-w-7xl space-y-8">
+        <div className="relative z-10 mx-auto max-w-7xl space-y-4 sm:space-y-6 lg:space-y-8">
           {/* Welcome Banner for new users */}
           {userStats.lessonsCompleted < 5 && (
             <div className="relative overflow-hidden rounded-2xl border border-german-gold/20 bg-gradient-to-r from-german-gold/10 via-orange-500/5 to-transparent p-6">
@@ -141,31 +142,31 @@ export default async function DashboardPage() {
           )}
 
           {/* Top Stats Row */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 lg:grid-cols-4">
             {/* Daily XP */}
-            <GlassCard className="relative overflow-hidden p-6 transition-all hover:bg-white/10">
-              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-24 w-24 rounded-full bg-german-gold/10 blur-2xl" />
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-german-gold/20 text-german-gold">
-                  <Zap className="h-6 w-6" />
+            <GlassCard className="relative overflow-hidden p-3 sm:p-4 lg:p-6 transition-all hover:bg-white/10">
+              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-16 w-16 sm:h-24 sm:w-24 rounded-full bg-german-gold/10 blur-2xl" />
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-german-gold/20 text-german-gold shrink-0">
+                  <Zap className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Današnji XP</p>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Današnji XP</p>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-bold text-white">{userStats.todayXp}</span>
-                    <span className="text-sm text-muted-foreground">/ {userStats.dailyGoal}</span>
+                    <span className="text-xl sm:text-2xl font-bold text-white">{userStats.todayXp}</span>
+                    <span className="text-xs sm:text-sm text-muted-foreground">/ {userStats.dailyGoal}</span>
                   </div>
                 </div>
               </div>
               {/* Progress Bar */}
-              <div className="mt-4 h-1.5 w-full rounded-full bg-white/5">
+              <div className="mt-2 sm:mt-4 h-1.5 w-full rounded-full bg-white/5">
                 <div 
                   className="h-full rounded-full bg-german-gold transition-all duration-500"
                   style={{ width: `${Math.min(100, (userStats.todayXp / userStats.dailyGoal) * 100)}%` }}
                 />
               </div>
               {userStats.todayXp >= userStats.dailyGoal && (
-                <p className="mt-2 text-xs text-green-400 flex items-center gap-1">
+                <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs text-green-400 flex items-center gap-1">
                   <CheckCircle2 className="h-3 w-3" />
                   Cilj dostignut!
                 </p>
@@ -173,21 +174,21 @@ export default async function DashboardPage() {
             </GlassCard>
 
             {/* Streak */}
-            <GlassCard className="relative overflow-hidden p-6 transition-all hover:bg-white/10">
-              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-24 w-24 rounded-full bg-orange-500/10 blur-2xl" />
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/20 text-orange-500">
-                  <Flame className="h-6 w-6" />
+            <GlassCard className="relative overflow-hidden p-3 sm:p-4 lg:p-6 transition-all hover:bg-white/10">
+              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-16 w-16 sm:h-24 sm:w-24 rounded-full bg-orange-500/10 blur-2xl" />
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-orange-500/20 text-orange-500 shrink-0">
+                  <Flame className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Streak</p>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Streak</p>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-bold text-white">{userStats.streak}</span>
-                    <span className="text-sm text-muted-foreground">dana</span>
+                    <span className="text-xl sm:text-2xl font-bold text-white">{userStats.streak}</span>
+                    <span className="text-xs sm:text-sm text-muted-foreground">dana</span>
                   </div>
                 </div>
               </div>
-              <div className="mt-4 flex gap-1">
+              <div className="mt-2 sm:mt-4 flex gap-0.5 sm:gap-1">
                 {weeklyActivity.map((day, i) => (
                   <div 
                     key={i}
@@ -195,95 +196,95 @@ export default async function DashboardPage() {
                   />
                 ))}
               </div>
-              <p className="mt-2 text-xs text-muted-foreground">
-                {userStats.streak >= 7 ? "🔥 Odlično! Nastavi tako!" : `Još ${7 - userStats.streak} dana do bonusa`}
+              <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs text-muted-foreground truncate">
+                {userStats.streak >= 7 ? "🔥 Odlično!" : `Još ${7 - userStats.streak} dana do bonusa`}
               </p>
             </GlassCard>
 
             {/* Words Learned */}
-            <GlassCard className="relative overflow-hidden p-6 transition-all hover:bg-white/10">
-              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-24 w-24 rounded-full bg-blue-500/10 blur-2xl" />
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 text-blue-400">
-                  <BookOpen className="h-6 w-6" />
+            <GlassCard className="relative overflow-hidden p-3 sm:p-4 lg:p-6 transition-all hover:bg-white/10">
+              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-16 w-16 sm:h-24 sm:w-24 rounded-full bg-blue-500/10 blur-2xl" />
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-blue-500/20 text-blue-400 shrink-0">
+                  <BookOpen className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Naučene reči</p>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Naučene reči</p>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-bold text-white">{userStats.wordsLearned}</span>
+                    <span className="text-xl sm:text-2xl font-bold text-white">{userStats.wordsLearned}</span>
                   </div>
                 </div>
               </div>
-              <p className="mt-4 text-xs text-muted-foreground flex items-center gap-1">
+              <p className="mt-2 sm:mt-4 text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
                 <TrendingUp className="h-3 w-3 text-green-400" />
-                <span className="text-green-400">+12</span> novih ove nedelje
+                <span className="text-green-400">+12</span> <span className="hidden sm:inline">novih</span> ove nedelje
               </p>
             </GlassCard>
 
             {/* Level Progress */}
-            <GlassCard className="relative overflow-hidden p-6 transition-all hover:bg-white/10">
-              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-24 w-24 rounded-full bg-purple-500/10 blur-2xl" />
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 text-purple-400">
-                  <Trophy className="h-6 w-6" />
+            <GlassCard className="relative overflow-hidden p-3 sm:p-4 lg:p-6 transition-all hover:bg-white/10">
+              <div className="absolute right-0 top-0 -mr-4 -mt-4 h-16 w-16 sm:h-24 sm:w-24 rounded-full bg-purple-500/10 blur-2xl" />
+              <div className="flex items-center gap-2 sm:gap-4">
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-purple-500/20 text-purple-400 shrink-0">
+                  <Trophy className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Nivo</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-white">{userStats.level}</span>
-                    <LevelBadge level={userStats.level as Level} className="scale-90" />
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-muted-foreground">Nivo</p>
+                  <div className="flex items-baseline gap-1 sm:gap-2">
+                    <span className="text-xl sm:text-2xl font-bold text-white">{userStats.level}</span>
+                    <LevelBadge level={userStats.level as Level} className="scale-75 sm:scale-90" />
                   </div>
                 </div>
               </div>
-              <div className="mt-4 h-1.5 w-full rounded-full bg-white/5">
+              <div className="mt-2 sm:mt-4 h-1.5 w-full rounded-full bg-white/5">
                 <div 
                   className="h-full rounded-full bg-purple-500 transition-all duration-500"
                   style={{ width: `${(userStats.xp / userStats.xpForNextLevel) * 100}%` }}
                 />
               </div>
-              <p className="mt-2 text-xs text-muted-foreground">
+              <p className="mt-1 sm:mt-2 text-[10px] sm:text-xs text-muted-foreground truncate">
                 Još {userStats.xpForNextLevel - userStats.xp} XP do {userStats.level === "A1" ? "A2" : "B1"}
               </p>
             </GlassCard>
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 lg:gap-8 lg:grid-cols-3">
             {/* Left Column - Next Lesson & Progress */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
               {/* Hero Card - Next Lesson */}
-              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-german-red/20 via-background to-background p-8">
-                <div className="absolute right-0 top-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-german-red/10 blur-3xl" />
+              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-gradient-to-br from-german-red/20 via-background to-background p-4 sm:p-6 lg:p-8">
+                <div className="absolute right-0 top-0 -mr-20 -mt-20 h-64 sm:h-96 w-64 sm:w-96 rounded-full bg-german-red/10 blur-3xl" />
                 
                 <div className="relative z-10">
-                  <div className="mb-6 flex items-center gap-3">
-                    <span className="inline-flex items-center rounded-full bg-german-red/20 px-3 py-1 text-xs font-medium text-german-red border border-german-red/20">
+                  <div className="mb-3 sm:mb-6 flex flex-wrap items-center gap-2 sm:gap-3">
+                    <span className="inline-flex items-center rounded-full bg-german-red/20 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium text-german-red border border-german-red/20">
                       Sledeća lekcija
                     </span>
-                    <span className="text-sm text-muted-foreground">Unit 2 • Lekcija 3</span>
+                    <span className="text-xs sm:text-sm text-muted-foreground">Unit 2 • Lekcija 3</span>
                   </div>
                   
-                  <h2 className="mb-2 text-3xl font-bold text-white">Naručivanje u restoranu</h2>
-                  <p className="text-sm text-german-gold/80 mb-2">Im Restaurant bestellen</p>
-                  <p className="mb-8 max-w-lg text-muted-foreground">
+                  <h2 className="mb-1 sm:mb-2 text-xl sm:text-2xl lg:text-3xl font-bold text-white">Naručivanje u restoranu</h2>
+                  <p className="text-xs sm:text-sm text-german-gold/80 mb-2">Im Restaurant bestellen</p>
+                  <p className="mb-4 sm:mb-8 max-w-lg text-xs sm:text-sm text-muted-foreground line-clamp-2 sm:line-clamp-none">
                     Nauči kako da naručiš hranu i piće, zatražiš račun i ostaviš bakšiš na nemačkom jeziku.
                   </p>
                   
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <Link href="/lekcije/1">
-                      <Button size="lg" className="h-12 rounded-xl bg-white text-black hover:bg-gray-200 px-8 text-base font-bold shadow-lg shadow-white/10">
-                        <Play className="mr-2 h-5 w-5 fill-current" />
+                      <Button size="lg" className="w-full sm:w-auto h-11 sm:h-12 rounded-xl bg-white text-black hover:bg-gray-200 px-6 sm:px-8 text-sm sm:text-base font-bold shadow-lg shadow-white/10">
+                        <Play className="mr-2 h-4 w-4 sm:h-5 sm:w-5 fill-current" />
                         Započni Lekciju
                       </Button>
                     </Link>
-                    <div className="flex items-center gap-4 rounded-xl bg-white/5 px-6 py-3 border border-white/5">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="h-4 w-4" />
+                    <div className="flex items-center justify-center gap-4 rounded-xl bg-white/5 px-4 sm:px-6 py-2 sm:py-3 border border-white/5">
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                        <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                         <span>15 min</span>
                       </div>
                       <div className="h-4 w-px bg-white/10" />
-                      <div className="flex items-center gap-2 text-sm text-german-gold">
-                        <Sparkles className="h-4 w-4" />
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-german-gold">
+                        <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
                         <span>+50 XP</span>
                       </div>
                     </div>
