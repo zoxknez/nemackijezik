@@ -16,23 +16,23 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Sidebar - only visible on lg+ screens */}
-      <div className="hidden lg:block">
-        <Sidebar
-          user={{
-            name: session.user.name || "Korisnik",
-            image: session.user.image || undefined,
-            level: (session.user as any).level || "A1",
-            xp: (session.user as any).xp || 0,
-            streak: (session.user as any).streak || 0,
-          }}
-        />
-      </div>
-      {/* Main content - full width on mobile, with sidebar space on lg+ */}
-      <main className="min-h-screen pb-20 lg:pb-0 lg:pl-[280px] transition-all duration-300">
+      {/* Sidebar - only visible on desktop (lg+) */}
+      <Sidebar
+        user={{
+          name: session.user.name || "Korisnik",
+          image: session.user.image || undefined,
+          level: (session.user as any).level || "A1",
+          xp: (session.user as any).xp || 0,
+          streak: (session.user as any).streak || 0,
+        }}
+      />
+      
+      {/* Main content */}
+      <main className="w-full min-h-screen pb-20 lg:pb-0 lg:pl-[280px]">
         {children}
       </main>
-      {/* Mobile bottom navigation */}
+      
+      {/* Mobile bottom navigation - only visible on mobile */}
       <MobileNav />
     </div>
   )

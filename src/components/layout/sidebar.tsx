@@ -59,17 +59,15 @@ export function Sidebar({ user }: SidebarProps) {
 
   return (
     <>
-      {/* Sidebar */}
-      <motion.aside
-        initial={false}
-        animate={{
-          width: isSidebarOpen ? 280 : 80,
-        }}
+      {/* Sidebar - Hidden on mobile, visible on lg+ */}
+      <aside
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen hidden lg:flex",
+          "fixed left-0 top-0 z-40 h-screen",
+          "hidden lg:flex", // KEY: hidden on mobile!
           "flex-col border-r border-white/10",
           "bg-background/80 backdrop-blur-xl",
           "transition-all duration-300",
+          isSidebarOpen ? "w-[280px]" : "w-[80px]"
         )}
       >
         {/* Logo */}
@@ -229,7 +227,7 @@ export function Sidebar({ user }: SidebarProps) {
             <ChevronRight className="h-4 w-4" />
           )}
         </Button>
-      </motion.aside>
+      </aside>
     </>
   )
 }
