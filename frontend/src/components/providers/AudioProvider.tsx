@@ -37,7 +37,11 @@ export function AudioProvider({ children }: { children: ReactNode }) {
           setIsPlaying(false)
           resolve()
         },
-        onerror: (id, error) => {
+        onloaderror: (_id, error) => {
+          setIsPlaying(false)
+          reject(error)
+        },
+        onplayerror: (_id, error) => {
           setIsPlaying(false)
           reject(error)
         },

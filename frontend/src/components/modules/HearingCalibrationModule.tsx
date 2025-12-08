@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSwipeable } from 'react-use-gesture'
+import { useSwipeable } from 'react-swipeable'
 import { AudioPlayer } from '../audio/AudioPlayer'
 import { exercisesApi } from '@/lib/api'
 import { MinimalPairExercise } from '@/types'

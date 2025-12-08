@@ -83,6 +83,11 @@ export interface MinimalPairExercise extends Exercise {
     pair1: { word: string; audio: string; image?: string }
     pair2: { word: string; audio: string; image?: string }
     correctAnswer: 'left' | 'right'
+    pairs?: Array<{
+      pair1: { word: string; audio: string; image?: string }
+      pair2: { word: string; audio: string; image?: string }
+      correctAnswer: 'left' | 'right'
+    }>
   }
 }
 
@@ -128,12 +133,14 @@ export interface UserProgress {
   id: string
   userId: string
   exerciseId: string
+  exerciseType?: ExerciseType
   completed: boolean
   score: number
   attempts: number
   audioRecordingUrl?: string
   aiFeedback?: AIFeedback
   completedAt?: string
+  createdAt?: string
 }
 
 export interface AIFeedback {
