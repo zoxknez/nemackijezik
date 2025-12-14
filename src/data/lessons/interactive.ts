@@ -523,7 +523,7 @@ export const phrasesLesson: Lesson = {
       type: "audio-sentence",
       question: "Izvini se",
       questionDe: "Entschuldigung",
-      explanation: "Izvините, molim Vas.",
+      explanation: "Izvinite, molim Vas.",
       targetSentence: "Entschuldigung, bitte."
     },
     {

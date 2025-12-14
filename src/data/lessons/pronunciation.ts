@@ -20,7 +20,7 @@ export const pronunciationLesson: Lesson = {
       type: "learn-card",
       question: "Nemački samoglasnici",
       questionDe: "Die Vokale",
-      explanation: "Neki nemački samoglasnici nemaju ekvivalent u srpskom jeziku. Danas ćemo vežbati 'Ü' i 'U'. 'Ü' se izgovara tako što namestite usta za 'U', a kažete 'I'.",
+      explanation: "Neki nemački samoglasnici nemaju ekvivalent u srpskom jeziku. Danas ćemo vežbati 'Ü'. 'Ü' se izgovara tako što namestite usta za 'U', a kažete 'I'.",
       audioText: "Übung macht den Meister."
     },
     {
