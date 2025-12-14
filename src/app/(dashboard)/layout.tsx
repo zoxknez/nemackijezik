@@ -1,8 +1,16 @@
 import { Sidebar } from "@/components/layout/sidebar"
 import { MobileNav } from "@/components/layout/mobile-nav"
+import { ToastContainer } from "@/components/ui/toast"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
-import { ExtendedUser } from "@/types"
+
+interface ExtendedUser {
+  name?: string | null
+  image?: string | null
+  level?: string
+  xp?: number
+  streak?: number
+}
 
 export default async function DashboardLayout({
   children,
@@ -18,8 +26,7 @@ export default async function DashboardLayout({
   const user = session.user as ExtendedUser
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
-      {/* Sidebar - only visible on desktop (lg+) */}
+    <div className="min-h-screen bg-background">
       <Sidebar
         user={{
           name: user.name || "Korisnik",
@@ -29,14 +36,11 @@ export default async function DashboardLayout({
           streak: user.streak || 0,
         }}
       />
-      
-      {/* Main content */}
-      <main className="w-full min-h-screen pb-20 lg:pb-0 lg:pl-[280px] overflow-x-hidden">
+      <main className="lg:pl-[280px] pb-20 lg:pb-0 transition-all duration-300">
         {children}
       </main>
-      
-      {/* Mobile bottom navigation - only visible on mobile */}
       <MobileNav />
+      <ToastContainer />
     </div>
   )
 }

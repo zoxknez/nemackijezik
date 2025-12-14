@@ -166,7 +166,7 @@ export default function AchievementsPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl space-y-8">
           {/* Hero Section with Stats */}
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-yellow-900/30 via-orange-900/20 to-background p-8">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-br from-yellow-900/30 via-orange-900/20 to-background p-8">
             <div className="absolute right-0 top-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-yellow-500/10 blur-3xl" />
             <div className="absolute left-1/2 bottom-0 -mb-20 h-64 w-64 rounded-full bg-orange-500/10 blur-3xl" />
             
@@ -174,7 +174,7 @@ export default function AchievementsPage() {
               {/* Left - Main Stats */}
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-500 to-orange-500 shadow-lg shadow-yellow-500/20">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-yellow-500 to-orange-500 shadow-lg shadow-yellow-500/20">
                     <Trophy className="h-7 w-7 text-white" />
                   </div>
                   <div>
@@ -227,7 +227,7 @@ export default function AchievementsPage() {
               <div className="space-y-4">
                 {/* Next to Unlock */}
                 {nextToUnlock && (
-                  <div className="p-4 rounded-xl bg-gradient-to-br from-german-gold/20 to-orange-500/10 border border-german-gold/20">
+                  <div className="p-4 rounded-xl bg-linear-to-br from-german-gold/20 to-orange-500/10 border border-german-gold/20">
                     <div className="flex items-center gap-2 mb-3">
                       <Sparkles className="h-4 w-4 text-german-gold" />
                       <span className="text-sm font-medium text-german-gold">Sledeće dostignuće</span>
@@ -509,9 +509,9 @@ export default function AchievementsPage() {
                     </GlassCard>
 
                     {/* Streak Bonus */}
-                    <GlassCard className="p-5 bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-500/20">
+                    <GlassCard className="p-5 bg-linear-to-br from-orange-500/10 to-red-500/10 border-orange-500/20">
                       <div className="flex items-center gap-4">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-red-500">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-linear-to-br from-orange-500 to-red-500">
                           <Flame className="h-7 w-7 text-white" />
                         </div>
                         <div className="flex-1">
@@ -529,7 +529,7 @@ export default function AchievementsPage() {
                             key={i}
                             className={cn(
                               "flex-1 h-2 rounded-full",
-                              i < 7 ? "bg-gradient-to-r from-orange-500 to-red-500" : "bg-white/10"
+                              i < 7 ? "bg-linear-to-r from-orange-500 to-red-500" : "bg-white/10"
                             )}
                           />
                         ))}
@@ -614,7 +614,7 @@ export default function AchievementsPage() {
 
                   {/* Your Stats */}
                   <div className="space-y-4">
-                    <GlassCard className="p-6 bg-gradient-to-br from-german-gold/10 to-orange-500/5 border-german-gold/20">
+                    <GlassCard className="p-6 bg-linear-to-br from-german-gold/10 to-orange-500/5 border-german-gold/20">
                       <h3 className="text-lg font-bold text-white mb-4">Vaša pozicija</h3>
                       <div className="text-center mb-4">
                         <div className="text-5xl font-bold text-german-gold mb-1">#4</div>

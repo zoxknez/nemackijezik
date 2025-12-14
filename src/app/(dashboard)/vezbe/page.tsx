@@ -168,7 +168,7 @@ export default function ExercisesPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl space-y-8">
           {/* Hero Section - Daily Challenge */}
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-indigo-900/50 via-purple-900/40 to-pink-900/30 p-8 backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-linear-to-r from-indigo-900/50 via-purple-900/40 to-pink-900/30 p-8 backdrop-blur-xl">
             <div className="absolute right-0 top-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
             <div className="absolute left-1/4 bottom-0 -mb-20 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl" />
             
@@ -407,7 +407,7 @@ export default function ExercisesPage() {
                     "group relative overflow-hidden p-6 transition-all hover:bg-white/5 hover:shadow-lg cursor-pointer h-full",
                     `hover:shadow-${category.id === 'grammar' ? 'blue' : category.id === 'pronunciation' ? 'purple' : category.id === 'listening' ? 'green' : 'orange'}-500/10`
                   )}>
-                    <div className={`absolute right-0 top-0 -mr-10 -mt-10 h-48 w-48 rounded-full bg-gradient-to-br ${category.gradient} blur-3xl transition-all group-hover:scale-150 opacity-50`} />
+                    <div className={`absolute right-0 top-0 -mr-10 -mt-10 h-48 w-48 rounded-full bg-linear-to-br ${category.gradient} blur-3xl transition-all group-hover:scale-150 opacity-50`} />
                     
                     <div className="relative z-10">
                       {/* Header */}
@@ -472,7 +472,7 @@ export default function ExercisesPage() {
                         <div className="flex items-center gap-3">
                           <div className="h-2 flex-1 rounded-full bg-white/10">
                             <div 
-                              className={cn("h-full rounded-full bg-gradient-to-r", category.gradient.replace("/20", ""))}
+                              className={cn("h-full rounded-full bg-linear-to-r", category.gradient.replace("/20", ""))}
                               style={{ width: `${(category.completedCount / category.exercisesCount) * 100}%` }}
                             />
                           </div>
@@ -550,7 +550,7 @@ export default function ExercisesPage() {
 
             {/* Weekly Summary */}
             <div className="space-y-4">
-              <GlassCard className="p-5 bg-gradient-to-br from-german-gold/10 to-orange-500/5 border-german-gold/20">
+              <GlassCard className="p-5 bg-linear-to-br from-german-gold/10 to-orange-500/5 border-german-gold/20">
                 <div className="flex items-center gap-2 mb-4">
                   <BarChart3 className="h-5 w-5 text-german-gold" />
                   <h3 className="font-bold text-white">Nedeljni pregled</h3>

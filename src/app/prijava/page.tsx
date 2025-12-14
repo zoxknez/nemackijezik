@@ -56,7 +56,7 @@ export default function LoginPage() {
           {/* Logo */}
           <div className="mb-8 text-center">
             <Link href="/" className="inline-flex items-center gap-2">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-german-red via-german-gold to-german-black shadow-lg">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-german-red via-german-gold to-german-black shadow-lg">
                 <GraduationCap className="h-7 w-7 text-white" />
               </div>
               <span className="text-2xl font-bold gradient-text">DeutschMaster</span>

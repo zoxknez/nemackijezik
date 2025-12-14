@@ -88,7 +88,7 @@ function FlipCard({ word }: { word: VocabularyWord }) {
         <div className="absolute inset-0 backface-hidden rotate-y-180">
           <div className="h-full w-full rounded-2xl border border-white/10 bg-[#0f172a] p-6 flex flex-col items-center justify-center text-center shadow-xl relative overflow-hidden">
             {/* Background Pattern */}
-            <div className="absolute inset-0 bg-gradient-to-br from-german-gold/5 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-br from-german-gold/5 to-transparent pointer-events-none" />
             
             <h3 className="text-2xl font-bold text-german-gold mb-4">
               {word.serbian}
@@ -131,7 +131,7 @@ export default function VocabularyPage() {
   return (
     <div className="space-y-8 pb-10">
       {/* Header Section */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600/20 via-indigo-500/10 to-background p-8 border border-white/10">
+      <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-blue-600/20 via-indigo-500/10 to-background p-8 border border-white/10">
         <div className="absolute top-0 right-0 -mt-10 -mr-10 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl" />
         <div className="absolute bottom-0 left-0 -mb-10 -ml-10 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl" />
         

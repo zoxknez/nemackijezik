@@ -110,14 +110,14 @@ export default async function ProfilePage() {
         <div className="relative z-10 mx-auto max-w-7xl space-y-8">
           {/* Profile Header Card */}
           <GlassCard className="relative overflow-hidden p-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-german-gold/10" />
+            <div className="absolute inset-0 bg-linear-to-r from-blue-600/10 via-purple-600/10 to-german-gold/10" />
             <div className="absolute right-0 top-0 -mr-20 -mt-20 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl" />
             <div className="absolute left-1/2 bottom-0 -mb-32 h-48 w-48 rounded-full bg-german-gold/20 blur-3xl" />
 
             <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center">
               {/* Avatar Section */}
-              <div className="relative flex-shrink-0">
-                <div className="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-german-gold via-orange-500 to-red-500 shadow-2xl ring-4 ring-white/10">
+              <div className="relative shrink-0">
+                <div className="flex h-36 w-36 items-center justify-center rounded-full bg-linear-to-br from-german-gold via-orange-500 to-red-500 shadow-2xl ring-4 ring-white/10">
                   <span className="text-5xl font-bold text-white">
                     {user?.name?.charAt(0) || "U"}
                   </span>
@@ -147,7 +147,7 @@ export default async function ProfilePage() {
                   </div>
                   <div className="h-3 overflow-hidden rounded-full bg-white/10">
                     <div 
-                      className="h-full rounded-full bg-gradient-to-r from-german-gold via-orange-400 to-red-400 transition-all duration-500"
+                      className="h-full rounded-full bg-linear-to-r from-german-gold via-orange-400 to-red-400 transition-all duration-500"
                       style={{ width: `${levelProgress}%` }}
                     />
                   </div>
@@ -171,7 +171,7 @@ export default async function ProfilePage() {
 
               {/* Action Buttons */}
               <div className="flex flex-col gap-3">
-                <Button className="bg-gradient-to-r from-german-gold to-orange-500 text-white hover:from-german-gold/90 hover:to-orange-500/90">
+                <Button className="bg-linear-to-r from-german-gold to-orange-500 text-white hover:from-german-gold/90 hover:to-orange-500/90">
                   <Edit className="mr-2 h-4 w-4" />
                   Izmeni Profil
                 </Button>
@@ -226,7 +226,7 @@ export default async function ProfilePage() {
                   <div key={skill.name} className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r ${skill.color}`}>
+                        <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-linear-to-r ${skill.color}`}>
                           <skill.icon className="h-5 w-5 text-white" />
                         </div>
                         <span className="font-medium text-white">{skill.name}</span>
@@ -235,7 +235,7 @@ export default async function ProfilePage() {
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-white/10">
                       <div 
-                        className={`h-full rounded-full bg-gradient-to-r ${skill.color} transition-all duration-700`}
+                        className={`h-full rounded-full bg-linear-to-r ${skill.color} transition-all duration-700`}
                         style={{ width: `${skill.level}%` }}
                       />
                     </div>
@@ -301,8 +301,8 @@ export default async function ProfilePage() {
                         <div 
                           className={`absolute bottom-0 w-full rounded-t-lg transition-all duration-500 ${
                             isToday 
-                              ? 'bg-gradient-to-t from-german-gold to-orange-400' 
-                              : 'bg-gradient-to-t from-blue-600/50 to-blue-400/50 group-hover:from-blue-600 group-hover:to-blue-400'
+                              ? 'bg-linear-to-t from-german-gold to-orange-400' 
+                              : 'bg-linear-to-t from-blue-600/50 to-blue-400/50 group-hover:from-blue-600 group-hover:to-blue-400'
                           }`}
                           style={{ height: `${height}%` }}
                         />
@@ -348,7 +348,7 @@ export default async function ProfilePage() {
                     className={`flex items-center gap-4 rounded-lg p-4 transition-all ${
                       achievement.earned 
                         ? 'bg-white/5 hover:bg-white/10' 
-                        : 'bg-white/[0.02] opacity-50'
+                        : 'bg-white/2 opacity-50'
                     }`}
                   >
                     <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${

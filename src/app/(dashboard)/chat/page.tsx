@@ -466,7 +466,7 @@ export default function ChatPage() {
                         <X className="h-4 w-4" />
                       </button>
                     </div>
-                    <div className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-br from-german-gold/20 to-orange-500/10 border border-german-gold/20">
+                    <div className="flex items-center gap-3 p-3 rounded-xl bg-linear-to-br from-german-gold/20 to-orange-500/10 border border-german-gold/20">
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-german-gold/20 text-german-gold">
                         {selectedScenario.icon}
                       </div>
@@ -561,7 +561,7 @@ export default function ChatPage() {
                 >
                   <MessageSquare className="h-5 w-5" />
                 </button>
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-cyan-500 shadow-lg shadow-blue-500/20">
                   <Bot className="h-6 w-6 text-white" />
                 </div>
                 <div>
@@ -626,8 +626,8 @@ export default function ChatPage() {
                     {/* Avatar */}
                     <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-lg ${
                       message.role === "user" 
-                        ? "bg-gradient-to-br from-german-gold to-orange-500" 
-                        : "bg-gradient-to-br from-blue-500 to-cyan-500"
+                        ? "bg-linear-to-br from-german-gold to-orange-500" 
+                        : "bg-linear-to-br from-blue-500 to-cyan-500"
                     }`}>
                       {message.role === "user" ? <User className="h-4 w-4 text-white" /> : <Bot className="h-4 w-4 text-white" />}
                     </div>
@@ -772,7 +772,7 @@ export default function ChatPage() {
                   className="flex justify-start"
                 >
                   <div className="flex gap-3">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 shadow-lg">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-cyan-500 shadow-lg">
                       <Bot className="h-4 w-4 text-white" />
                     </div>
                     <div className="rounded-2xl rounded-tl-none border border-white/10 bg-white/10 p-4 backdrop-blur-md">
@@ -906,7 +906,7 @@ export default function ChatPage() {
                       onClick={() => handleModeChange("roleplay", scenario)}
                       className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-german-gold/30 transition-all text-left group"
                     >
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-german-gold/20 to-orange-500/10 text-german-gold mb-3 group-hover:scale-110 transition-transform">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-german-gold/20 to-orange-500/10 text-german-gold mb-3 group-hover:scale-110 transition-transform">
                         {scenario.icon}
                       </div>
                       <h3 className="font-medium text-white">{scenario.title}</h3>

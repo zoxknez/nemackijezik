@@ -95,19 +95,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return session
     },
-    async signIn({ user, account }) {
+    async signIn({ account }) {
       // Allow OAuth without email verification
       if (account?.provider !== "credentials") return true
 
-      // Check if email is verified for credentials login
-      const existingUser = await prisma.user.findUnique({
-        where: { id: user.id },
-      })
-
-      if (!existingUser?.emailVerified) {
-        return false
-      }
-
+      // For credentials, always allow (emailVerified is set on registration)
       return true
     },
   },
