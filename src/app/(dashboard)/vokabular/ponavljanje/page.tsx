@@ -16,6 +16,7 @@ import {
 import { Button, GlassCard } from "@/components/ui"
 import Link from "next/link"
 import { vocabulary, type VocabularyWord } from "@/data/vocabulary"
+import { useVocabularyStore } from "@/lib/store"
 
 interface FlashCard extends VocabularyWord {
   currentInterval: number
@@ -47,18 +48,41 @@ export default function PonavljanjePage() {
     totalXP: 0
   })
 
+  const { getDueWords, reviewWord, addWord } = useVocabularyStore()
+
   // Initialize flashcards from vocabulary data
   useEffect(() => {
-    // In a real app, this would fetch due cards from a database
-    // For now, we'll take a random selection of 20 words
-    const shuffled = [...vocabulary].sort(() => 0.5 - Math.random())
-    const selected = shuffled.slice(0, 20).map(word => ({
-      ...word,
-      currentInterval: 0,
-      easeFactor: 2.5,
-      repetitions: 0
-    }))
-    setFlashcards(selected)
+    const due = getDueWords()
+    
+    if (due.length === 0) {
+       // Fallback: Add 5 random words if store is empty for demo purposes
+       // In reality, words should be added when completing lessons
+       const shuffled = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, 5)
+       shuffled.forEach(w => addWord(w.id, w.german, w.serbian))
+       
+       const cards = shuffled.map(w => ({
+         ...w,
+         currentInterval: 0,
+         easeFactor: 2.5,
+         repetitions: 0
+       }))
+       setFlashcards(cards)
+    } else {
+      const cards = due.map(progress => {
+        const original = vocabulary.find(v => v.id === progress.id)
+        // Fallback if original not found (shouldn't happen if ids match)
+        if (!original) return null
+        
+        return {
+          ...original,
+          currentInterval: progress.interval,
+          easeFactor: progress.easeFactor,
+          repetitions: progress.repetitions
+        }
+      }).filter((c): c is FlashCard => c !== null)
+      
+      setFlashcards(cards)
+    }
   }, [])
 
   const remainingCards = flashcards.filter(card => !completedCards.includes(card.id))
@@ -90,6 +114,10 @@ export default function PonavljanjePage() {
       [quality]: prev[quality] + 1,
       totalXP: prev.totalXP + xpGained
     }))
+
+    // Update SRS in store
+    const qualityNum = quality === "easy" ? 5 : quality === "good" ? 4 : quality === "hard" ? 3 : 1
+    reviewWord(currentCard.id, qualityNum)
 
     // Mark card as completed for this session (in real app, update SRS schedule)
     if (quality !== "again") {

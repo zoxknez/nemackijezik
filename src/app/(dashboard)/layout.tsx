@@ -2,6 +2,7 @@ import { Sidebar } from "@/components/layout/sidebar"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
+import { ExtendedUser } from "@/types"
 
 export default async function DashboardLayout({
   children,
@@ -14,16 +15,18 @@ export default async function DashboardLayout({
     redirect("/prijava")
   }
 
+  const user = session.user as ExtendedUser
+
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Sidebar - only visible on desktop (lg+) */}
       <Sidebar
         user={{
-          name: session.user.name || "Korisnik",
-          image: session.user.image || undefined,
-          level: (session.user as any).level || "A1",
-          xp: (session.user as any).xp || 0,
-          streak: (session.user as any).streak || 0,
+          name: user.name || "Korisnik",
+          image: user.image || undefined,
+          level: user.level || "A1",
+          xp: user.xp || 0,
+          streak: user.streak || 0,
         }}
       />
       

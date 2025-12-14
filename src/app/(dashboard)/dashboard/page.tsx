@@ -104,10 +104,6 @@ export default async function DashboardPage() {
     accuracy: 87
   }
 
-  // Calculate greeting based on time
-  const hour = new Date().getHours()
-  const greeting = hour < 12 ? "Dobro jutro" : hour < 18 ? "Dobar dan" : "Dobro veče"
-
   return (
     <>
       <Header

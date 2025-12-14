@@ -28,6 +28,14 @@ export const a1Lessons: Lesson[] = [
         color: "yellow"
       },
       {
+        id: "a1-1-rhythm-1",
+        type: "rhythm-practice",
+        question: "Guten Tag! Wie geht es Ihnen?",
+        rhythmPattern: ". - . - . - . -",
+        correctAnswer: "continue",
+        explanation: "Slušaj ritam formalnog pozdrava."
+      },
+      {
         id: "a1-1-learn-2",
         type: "learn-card",
         question: "Predstavljanje",
@@ -38,6 +46,26 @@ export const a1Lessons: Lesson[] = [
         color: "blue"
       },
       {
+        id: "a1-1-speed-1",
+        type: "speed-drill",
+        question: "Ich heiße Marko und ich komme aus Serbien.",
+        speeds: [
+          { speed: 0.8, label: "Polako" },
+          { speed: 1.0, label: "Normalno" },
+          { speed: 1.2, label: "Brzo" },
+          { speed: 1.0, label: "Normalno" }
+        ],
+        correctAnswer: "continue",
+        explanation: "Vežbaj izgovor cele rečenice."
+      },
+      {
+        id: "a1-1-record-1",
+        type: "listen-record",
+        question: "Ich komme aus Serbien",
+        correctAnswer: "continue",
+        explanation: "Slušaj i ponovi. Snimi svoj izgovor."
+      },
+      {
         id: "a1-1-flash-1",
         type: "flashcard",
         question: "Doviđenja",
@@ -45,6 +73,14 @@ export const a1Lessons: Lesson[] = [
         explanation: "Formalan način da se pozdravite na odlasku.",
         correctAnswer: "continue",
         audioText: "Auf Wiedersehen"
+      },
+      {
+        id: "a1-1-back-1",
+        type: "back-chaining",
+        question: "Auf Wiedersehen",
+        syllables: ["Auf", "Wie", "der", "se", "hen"],
+        correctAnswer: "continue",
+        explanation: "Vežbaj izgovor složene reči za doviđenja."
       },
       // Practice Phase
       {

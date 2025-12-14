@@ -46,7 +46,7 @@ router.post('/register', async (req, res) => {
         progressLevel: user.progress_level,
       },
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Registration error:', error)
     res.status(500).json({ error: 'Registration failed' })
   }
@@ -92,7 +92,7 @@ router.post('/login', async (req, res) => {
         progressLevel: user.progress_level,
       },
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Login error:', error)
     res.status(500).json({ error: 'Login failed' })
   }
@@ -119,7 +119,7 @@ router.get('/me', authenticateToken, async (req: AuthRequest, res) => {
       progressLevel: user.progress_level,
       audioSettings: user.audio_settings,
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Get user error:', error)
     res.status(500).json({ error: 'Failed to get user' })
   }

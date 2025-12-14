@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 import { motion, AnimatePresence } from "motion/react"
 import { 
   ArrowLeft, 
@@ -21,13 +21,13 @@ import { GlassCard } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { LevelBadge } from "@/components/ui/badge"
 import Link from "next/link"
-import { lessons, type Exercise } from "@/data/lessons"
+import { lessons } from "@/data/lessons"
 import { cn } from "@/lib/utils"
-import { playSynthCorrect, playSynthWrong, playSynthClick } from "@/lib/sounds"
+import { playSynthCorrect, playSynthWrong } from "@/lib/sounds"
+import { SpeedDrill, BackChaining, RhythmPractice, ListenRecord, RhymePlayer, MinimalPairs, SentenceBuilder, Dialogue, WordBuild, ErrorCorrection, Conjugation, ClozeTest, StoryMode, ImageAssociation, WordChain, MemoryMatch, TimedChallenge, AudioSentence, WordCategories, PictureDescription, Dictation, CasePractice } from "@/components/lesson/special-exercises"
 
 export default function LessonPage() {
   const params = useParams()
-  const router = useRouter()
   const lessonId = params.id as string
   
   const lessonData = lessons.find(l => l.id === lessonId)
@@ -59,6 +59,7 @@ export default function LessonPage() {
         { id: `de-${i}`, text: p.de, type: 'de' as const, matched: false },
         { id: `sr-${i}`, text: p.sr, type: 'sr' as const, matched: false }
       ]).sort(() => Math.random() - 0.5)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMatchingPairs(pairs)
     }
   }, [currentExerciseIndex, lessonData])
@@ -128,15 +129,27 @@ export default function LessonPage() {
   const checkAnswer = () => {
     let correct = false
     
-    if (exercise.type === "learn-card" || exercise.type === "flashcard") {
-      // Learn cards and flashcards are always "correct" when user clicks continue
+    if (exercise.type === "learn-card" || exercise.type === "flashcard" || 
+        exercise.type === "speed-drill" || exercise.type === "back-chaining" || 
+        exercise.type === "rhythm-practice" || exercise.type === "listen-record" ||
+        exercise.type === "minimal-pairs" || exercise.type === "sentence-builder" ||
+        exercise.type === "dialogue" || exercise.type === "word-build" ||
+        exercise.type === "error-correction" || exercise.type === "conjugation" ||
+        exercise.type === "cloze-test" || exercise.type === "story-mode" ||
+        exercise.type === "image-association" || exercise.type === "word-chain" ||
+        exercise.type === "memory-match" || exercise.type === "timed-challenge" ||
+        exercise.type === "audio-sentence" || exercise.type === "word-categories" ||
+        exercise.type === "picture-description" || exercise.type === "dictation" ||
+        exercise.type === "case-practice") {
+      // These types are always "correct" when completed
       correct = true
-    } else if (exercise.type === "multiple-choice" || exercise.type === "listening" || exercise.type === "gender-game") {
+    } else if (exercise.type === "multiple-choice" || (exercise.type === "listening" && exercise.options) || exercise.type === "gender-game") {
       correct = selectedOption === exercise.correctAnswer
-    } else if (exercise.type === "translation" || exercise.type === "fill-blank" || exercise.type === "vocabulary") {
-      const answers = Array.isArray(exercise.correctAnswer) ? exercise.correctAnswer : [exercise.correctAnswer]
+    } else if (exercise.type === "translation" || exercise.type === "fill-blank" || exercise.type === "vocabulary" || (exercise.type === "listening" && !exercise.options)) {
+      const correctAnswerValue = exercise.correctAnswer || ""
+      const answers = Array.isArray(correctAnswerValue) ? correctAnswerValue : [correctAnswerValue]
       correct = answers.some(a => 
-        a.toLowerCase().trim() === answer.toLowerCase().trim()
+        a && a.toLowerCase().trim() === answer.toLowerCase().trim()
       )
     } else if (exercise.type === "matching") {
       // Handled in handleMatchClick
@@ -186,7 +199,7 @@ export default function LessonPage() {
   }
 
   if (lives === 0) {
-    return <GameOverScreen lessonId={lessonId} />
+    return <GameOverScreen />
   }
 
   return (
@@ -375,12 +388,22 @@ export default function LessonPage() {
                   {exercise.type === "gender-game" && (
                     <div className="space-y-6">
                       <div className="text-center">
+                        {exercise.image && (
+                          <div className="mb-6 flex justify-center">
+                            <div className="relative w-48 h-48 rounded-xl overflow-hidden border-2 border-white/10">
+                              {/* Placeholder for actual image component */}
+                              <div className="w-full h-full bg-white/5 flex items-center justify-center text-muted-foreground">
+                                <span className="text-4xl">🖼️</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                         <motion.h3 
                           initial={{ scale: 0.8 }}
                           animate={{ scale: 1 }}
                           className="text-4xl font-bold text-white mb-2"
                         >
-                          {exercise.questionDe}
+                          {exercise.questionDe || exercise.question}
                         </motion.h3>
                         <p className="text-muted-foreground">Izaberi tačan rod (član)</p>
                       </div>
@@ -435,9 +458,9 @@ export default function LessonPage() {
                   )}
 
                   {/* Text Input Types */}
-                  {(exercise.type === "fill-blank" || exercise.type === "translation" || exercise.type === "vocabulary") && (
+                  {(exercise.type === "fill-blank" || exercise.type === "translation" || exercise.type === "vocabulary" || (exercise.type === "listening" && !exercise.options)) && (
                     <Input
-                      placeholder="Upiši odgovor..."
+                      placeholder="Upiši ono što čuješ..."
                       value={answer}
                       onChange={(e) => setAnswer(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
@@ -496,7 +519,209 @@ export default function LessonPage() {
                     </div>
                   )}
 
-                  {exercise.type !== "matching" && (
+                  {/* Special Exercises */}
+                  {exercise.type === "speed-drill" && exercise.speeds && (
+                    <SpeedDrill
+                      text={exercise.question}
+                      speeds={exercise.speeds}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "back-chaining" && exercise.syllables && (
+                    <BackChaining
+                      syllables={exercise.syllables}
+                      fullText={exercise.question}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "rhythm-practice" && exercise.rhythmPattern && (
+                    <RhythmPractice
+                      text={exercise.question}
+                      pattern={exercise.rhythmPattern}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "listen-record" && (
+                    <ListenRecord
+                      text={exercise.question}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "rhythm-practice" && exercise.lyrics && (
+                    <RhymePlayer
+                      title={exercise.question}
+                      lyrics={exercise.lyrics}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "minimal-pairs" && exercise.pairOptions && (
+                    <MinimalPairs
+                      pairs={exercise.pairOptions}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "sentence-builder" && exercise.segments && (
+                    <SentenceBuilder
+                      segments={exercise.segments}
+                      correctAnswer={exercise.correctAnswer as string}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "dialogue" && exercise.dialogueLines && (
+                    <Dialogue
+                      lines={exercise.dialogueLines}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "word-build" && exercise.letters && (
+                    <WordBuild
+                      letters={exercise.letters}
+                      correctAnswer={exercise.correctAnswer as string}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "error-correction" && exercise.errorSentence && (
+                    <ErrorCorrection
+                      sentence={exercise.errorSentence}
+                      errorPosition={exercise.errorPosition || 0}
+                      correctAnswer={exercise.correctAnswer as string}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "conjugation" && exercise.conjugationVerb && (
+                    <Conjugation
+                      verb={exercise.conjugationVerb}
+                      pronoun={exercise.conjugationPronoun || "ich"}
+                      tense={exercise.conjugationTense || "Präsens"}
+                      correctAnswer={exercise.correctAnswer as string}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "cloze-test" && exercise.wordBank && (
+                    <ClozeTest
+                      sentence={exercise.question}
+                      blankIndices={exercise.blankIndices || []}
+                      wordBank={exercise.wordBank}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "story-mode" && exercise.storyText && exercise.storyQuestions && (
+                    <StoryMode
+                      title={exercise.question}
+                      text={exercise.storyText}
+                      questions={exercise.storyQuestions}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "image-association" && exercise.imageOptions && (
+                    <ImageAssociation
+                      word={exercise.questionDe || exercise.question}
+                      options={exercise.imageOptions}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "word-chain" && exercise.chainWords && (
+                    <WordChain
+                      startWord={exercise.questionDe || exercise.question}
+                      chainWords={exercise.chainWords}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "memory-match" && exercise.memoryPairs && (
+                    <MemoryMatch
+                      pairs={exercise.memoryPairs}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "timed-challenge" && exercise.pairs && (
+                    <TimedChallenge
+                      words={exercise.pairs.map(p => ({ german: p.de, translation: p.sr }))}
+                      timeLimit={exercise.timeLimit || 60}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "audio-sentence" && exercise.targetSentence && (
+                    <AudioSentence
+                      sentence={exercise.targetSentence}
+                      translation={exercise.explanation}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "word-categories" && exercise.categories && exercise.wordsToSort && (
+                    <WordCategories
+                      categories={exercise.categories}
+                      wordsToSort={exercise.wordsToSort}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "picture-description" && exercise.pictureEmoji && (
+                    <PictureDescription
+                      emoji={exercise.pictureEmoji}
+                      correctWords={exercise.options || []}
+                      hint={exercise.hint || ""}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "dictation" && exercise.dictationSentence && (
+                    <Dictation
+                      sentence={exercise.dictationSentence}
+                      translation={exercise.explanation}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type === "case-practice" && exercise.caseName && exercise.caseArticles && (
+                    <CasePractice
+                      caseName={exercise.caseName}
+                      noun={exercise.questionDe || exercise.question}
+                      options={exercise.caseArticles}
+                      explanation={exercise.explanation}
+                      onComplete={checkAnswer}
+                    />
+                  )}
+
+                  {exercise.type !== "matching" && 
+                   exercise.type !== "speed-drill" && 
+                   exercise.type !== "back-chaining" && 
+                   exercise.type !== "rhythm-practice" && 
+                   exercise.type !== "listen-record" && 
+                   exercise.type !== "minimal-pairs" && 
+                   exercise.type !== "sentence-builder" && 
+                   exercise.type !== "dialogue" && 
+                   exercise.type !== "word-build" && 
+                   exercise.type !== "error-correction" && 
+                   exercise.type !== "conjugation" && 
+                   exercise.type !== "cloze-test" && 
+                   exercise.type !== "story-mode" && 
+                   exercise.type !== "image-association" && 
+                   exercise.type !== "word-chain" && 
+                   exercise.type !== "memory-match" && 
+                   exercise.type !== "timed-challenge" && 
+                   exercise.type !== "audio-sentence" && 
+                   exercise.type !== "word-categories" && 
+                   exercise.type !== "picture-description" && 
+                   exercise.type !== "dictation" && 
+                   exercise.type !== "case-practice" && (
                     <Button
                       className="w-full bg-german-gold text-black hover:bg-german-gold/90 font-bold text-lg h-12"
                       onClick={checkAnswer}
@@ -614,7 +839,7 @@ function CompletionScreen({ xp, lessonTitle }: { xp: number; lessonTitle: string
           <h1 className="text-3xl font-bold mb-2 text-white">Odlično! 🎉</h1>
           <p className="text-muted-foreground mb-8">
             Uspešno si završio/la lekciju <br/>
-            <span className="text-german-gold font-medium">"{lessonTitle}"</span>
+            <span className="text-german-gold font-medium">&quot;{lessonTitle}&quot;</span>
           </p>
 
           <div className="space-y-4 mb-8">
@@ -653,7 +878,7 @@ function CompletionScreen({ xp, lessonTitle }: { xp: number; lessonTitle: string
   )
 }
 
-function GameOverScreen({ lessonId }: { lessonId: string }) {
+function GameOverScreen() {
   return (
     <div className="max-w-md mx-auto text-center p-4">
       <motion.div

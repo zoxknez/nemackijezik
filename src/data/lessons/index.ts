@@ -1,4 +1,12 @@
 // Glavni export za sve lekcije
+import { introLesson } from './intro'
+import { rhymeLessons } from './rhymes'
+import { pronunciationLesson } from './pronunciation'
+import { dialogueLesson } from './dialogue'
+import { wordBuildingLesson } from './word-building'
+import { grammarLesson, readingLesson } from './grammar'
+import { numbersLesson, colorsLesson, animalsLesson, foodLesson, phrasesLesson } from './interactive'
+import { bodyPartsLesson, weatherLesson, casesLesson, dailyRoutineLesson, hobbiesLesson } from './advanced'
 import { a1Lessons } from './a1'
 import { a2Lessons } from './a2'
 import { b1Lessons } from './b1'
@@ -10,6 +18,23 @@ export type { Level, ExerciseType, Exercise, Lesson } from '../types'
 
 // Kombinovani export svih lekcija
 export const lessons = [
+  introLesson,
+  ...rhymeLessons,
+  pronunciationLesson,
+  dialogueLesson,
+  wordBuildingLesson,
+  grammarLesson,
+  readingLesson,
+  numbersLesson,
+  colorsLesson,
+  animalsLesson,
+  foodLesson,
+  phrasesLesson,
+  bodyPartsLesson,
+  weatherLesson,
+  casesLesson,
+  dailyRoutineLesson,
+  hobbiesLesson,
   ...a1Lessons,
   ...a2Lessons,
   ...b1Lessons,
@@ -19,7 +44,31 @@ export const lessons = [
 ]
 
 // Pojedinačni exporti po nivou
-export { a1Lessons, a2Lessons, b1Lessons, b2Lessons, c1Lessons, c2Lessons }
+export { 
+  introLesson, 
+  rhymeLessons, 
+  pronunciationLesson, 
+  dialogueLesson, 
+  wordBuildingLesson, 
+  grammarLesson, 
+  readingLesson,
+  numbersLesson,
+  colorsLesson,
+  animalsLesson,
+  foodLesson,
+  phrasesLesson,
+  bodyPartsLesson,
+  weatherLesson,
+  casesLesson,
+  dailyRoutineLesson,
+  hobbiesLesson,
+  a1Lessons, 
+  a2Lessons, 
+  b1Lessons, 
+  b2Lessons, 
+  c1Lessons, 
+  c2Lessons 
+}
 
 // Helper funkcije
 export const getLessonsByLevel = (level: string) => 

@@ -20,7 +20,7 @@ router.get('/', authenticateToken, async (req: AuthRequest, res) => {
     )
 
     res.json(result.rows)
-  } catch (error: any) {
+  } catch (error) {
     console.error('Get progress error:', error)
     res.status(500).json({ error: 'Failed to fetch progress' })
   }
@@ -51,7 +51,7 @@ router.post('/', authenticateToken, async (req: AuthRequest, res) => {
     )
 
     res.json({ message: 'Progress updated successfully' })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Update progress error:', error)
     res.status(500).json({ error: 'Failed to update progress' })
   }
@@ -93,7 +93,7 @@ router.get('/statistics', authenticateToken, async (req: AuthRequest, res) => {
       overall: statsResult.rows[0],
       byModule: moduleStatsResult.rows,
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Get statistics error:', error)
     res.status(500).json({ error: 'Failed to fetch statistics' })
   }

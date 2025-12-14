@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import jwt from 'jsonwebtoken'
+import jwt, { VerifyErrors, JwtPayload } from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production'
 
@@ -15,12 +15,17 @@ export function authenticateToken(req: AuthRequest, res: Response, next: NextFun
     return res.status(401).json({ error: 'Access token required' })
   }
 
-  jwt.verify(token, JWT_SECRET, (err: any, decoded: any) => {
+  jwt.verify(token, JWT_SECRET, (err: VerifyErrors | null, decoded: string | JwtPayload | undefined) => {
     if (err) {
       return res.status(403).json({ error: 'Invalid or expired token' })
     }
-    req.userId = decoded.userId
-    next()
+    
+    if (decoded && typeof decoded === 'object' && 'userId' in decoded) {
+      req.userId = (decoded as JwtPayload).userId
+      next()
+    } else {
+      return res.status(403).json({ error: 'Invalid token payload' })
+    }
   })
 }
 

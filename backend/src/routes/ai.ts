@@ -1,7 +1,5 @@
 import express from 'express'
 import multer from 'multer'
-import axios from 'axios'
-import { db } from '../db'
 import { authenticateToken, AuthRequest } from '../middleware/auth'
 
 const router = express.Router()
@@ -32,7 +30,7 @@ router.post('/analyze-speech', authenticateToken, upload.single('audio'), async 
     }
 
     res.json(mockFeedback)
-  } catch (error: any) {
+  } catch (error) {
     console.error('Analyze speech error:', error)
     res.status(500).json({ error: 'Failed to analyze speech' })
   }
@@ -57,7 +55,7 @@ router.post('/compare-waveform', authenticateToken, upload.single('audio'), asyn
     }
 
     res.json(mockComparison)
-  } catch (error: any) {
+  } catch (error) {
     console.error('Compare waveform error:', error)
     res.status(500).json({ error: 'Failed to compare waveform' })
   }
@@ -85,7 +83,7 @@ router.post('/face-detection', authenticateToken, upload.single('image'), async 
     }
 
     res.json(mockDetection)
-  } catch (error: any) {
+  } catch (error) {
     console.error('Face detection error:', error)
     res.status(500).json({ error: 'Failed to detect face' })
   }

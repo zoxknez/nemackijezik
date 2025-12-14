@@ -1,6 +1,5 @@
 import express from 'express'
 import { db } from '../db'
-import { authenticateToken, AuthRequest } from '../middleware/auth'
 
 const router = express.Router()
 
@@ -10,7 +9,7 @@ router.get('/', async (req, res) => {
     const { level } = req.query
 
     let query = 'SELECT * FROM lessons'
-    const params: any[] = []
+    const params: (string | number)[] = []
 
     if (level) {
       query += ' WHERE level = $1 ORDER BY order_index'
@@ -21,7 +20,7 @@ router.get('/', async (req, res) => {
 
     const result = await db.query(query, params)
     res.json(result.rows)
-  } catch (error: any) {
+  } catch (error) {
     console.error('Get lessons error:', error)
     res.status(500).json({ error: 'Failed to fetch lessons' })
   }
@@ -39,7 +38,7 @@ router.get('/:id', async (req, res) => {
     }
 
     res.json(result.rows[0])
-  } catch (error: any) {
+  } catch (error) {
     console.error('Get lesson error:', error)
     res.status(500).json({ error: 'Failed to fetch lesson' })
   }
@@ -56,7 +55,7 @@ router.get('/:id/modules', async (req, res) => {
     )
 
     res.json(result.rows)
-  } catch (error: any) {
+  } catch (error) {
     console.error('Get modules error:', error)
     res.status(500).json({ error: 'Failed to fetch modules' })
   }

@@ -1,7 +1,6 @@
 "use client"
 
 import { useUIStore } from "@/lib/store"
-import { cn } from "@/lib/utils"
 import { Bell, Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -13,7 +12,7 @@ interface HeaderProps {
 }
 
 export function Header({ title, subtitle, showGreeting, userName }: HeaderProps) {
-  const { isSoundEnabled, toggleSound, theme, setTheme } = useUIStore()
+  const { theme, setTheme } = useUIStore()
 
   // Get time-based greeting
   const getGreeting = () => {

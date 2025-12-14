@@ -1,5 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
+import { calculateSRS } from "./srs"
 
 // ===== USER STORE =====
 interface UserState {
@@ -232,3 +233,87 @@ export const useVocabReviewStore = create<VocabReviewState>((set) => ({
   
   reset: () => set({ queue: [], currentIndex: 0, isFlipped: false }),
 }))
+
+// ===== VOCABULARY PROGRESS STORE (SRS) =====
+interface WordProgress {
+  id: string
+  word: string
+  translation: string
+  easeFactor: number
+  interval: number
+  repetitions: number
+  nextReview: number // timestamp
+  lastReview: number // timestamp
+}
+
+interface VocabularyState {
+  words: Record<string, WordProgress>
+  addWord: (id: string, word: string, translation: string) => void
+  reviewWord: (id: string, quality: number) => void
+  getDueWords: () => WordProgress[]
+}
+
+export const useVocabularyStore = create<VocabularyState>()(
+  persist(
+    (set, get) => ({
+      words: {},
+      
+      addWord: (id, word, translation) => set((state) => {
+        if (state.words[id]) return state // Already exists
+        return {
+          words: {
+            ...state.words,
+            [id]: {
+              id,
+              word,
+              translation,
+              easeFactor: 2.5,
+              interval: 0,
+              repetitions: 0,
+              nextReview: Date.now(),
+              lastReview: 0
+            }
+          }
+        }
+      }),
+
+      reviewWord: (id, quality) => set((state) => {
+        const word = state.words[id]
+        if (!word) return state
+
+        const srsResult = calculateSRS({
+          quality,
+          currentEaseFactor: word.easeFactor,
+          currentInterval: word.interval,
+          currentRepetitions: word.repetitions
+        })
+
+        const nextReviewDate = new Date()
+        nextReviewDate.setDate(nextReviewDate.getDate() + srsResult.interval)
+
+        return {
+          words: {
+            ...state.words,
+            [id]: {
+              ...word,
+              easeFactor: srsResult.easeFactor,
+              interval: srsResult.interval,
+              repetitions: srsResult.repetitions,
+              nextReview: nextReviewDate.getTime(),
+              lastReview: Date.now()
+            }
+          }
+        }
+      }),
+
+      getDueWords: () => {
+        const state = get()
+        const now = Date.now()
+        return Object.values(state.words).filter(w => w.nextReview <= now)
+      }
+    }),
+    {
+      name: "vocabulary-storage"
+    }
+  )
+)

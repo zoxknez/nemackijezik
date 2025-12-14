@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { textToSpeech, getPronunciationFeedback } from "@/lib/ai/speech"
+import { textToSpeech } from "@/lib/ai/speech"
 import { auth } from "@/lib/auth"
 
 export async function POST(request: NextRequest) {

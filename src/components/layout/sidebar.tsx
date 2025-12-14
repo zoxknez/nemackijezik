@@ -15,8 +15,6 @@ import {
   Trophy,
   User,
   Settings,
-  Menu,
-  X,
   GraduationCap,
   Flame,
   Zap,

@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
     }
 
     res.json(result.rows[0])
-  } catch (error: any) {
+  } catch (error) {
     console.error('Get exercise error:', error)
     res.status(500).json({ error: 'Failed to fetch exercise' })
   }
@@ -88,7 +88,7 @@ router.post('/:id/submit', authenticateToken, async (req: AuthRequest, res) => {
       score: finalScore,
       correctAnswer: exercise.correct_answer,
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Submit exercise error:', error)
     res.status(500).json({ error: 'Failed to submit exercise' })
   }
@@ -119,7 +119,7 @@ router.post('/:id/audio', authenticateToken, upload.single('audio'), async (req:
       audioUrl,
       message: 'Audio uploaded successfully',
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Upload audio error:', error)
     res.status(500).json({ error: 'Failed to upload audio' })
   }
