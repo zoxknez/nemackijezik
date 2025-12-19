@@ -1948,6 +1948,434 @@ export const a1Lessons: Lesson[] = [
   },
 
   // ==========================================
+  // DODATNE A1 LEKCIJE
+  // ==========================================
+  {
+    id: "a1-13",
+    title: "U prodavnici",
+    titleDe: "Im Geschäft",
+    description: "Kupovina, platiti, tražiti proizvode, cene.",
+    level: "A1",
+    unit: 4,
+    order: 13,
+    duration: 25,
+    xpReward: 60,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Vrste prodavnica", "Ich möchte/Ich hätte gern", "Množina", "Koliko košta?"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "a1-13-learn-1",
+        type: "learn-card",
+        question: "Prodavnice",
+        questionDe: "der Supermarkt, die Bäckerei, die Apotheke",
+        explanation: "Vrste prodavnica: der Supermarkt (supermarket), die Bäckerei (pekara), die Apotheke (apoteka), die Metzgerei (mesara), der Laden (radnja). U Nemačkoj postoje specijalizovane prodavnice!",
+        correctAnswer: "continue",
+        audioText: "der Supermarkt, die Bäckerei, die Apotheke, die Metzgerei",
+        color: "yellow"
+      },
+      {
+        id: "a1-13-learn-2",
+        type: "learn-card",
+        question: "Želje - Ich möchte...",
+        questionDe: "Ich möchte ein Brot kaufen.",
+        explanation: "Za izražavanje želja: Ich möchte... (Želeo bih...) ili Ich hätte gern... (Imao bih rado...). Obe forme su učtive. Ich will (hoću) je manje učtivo!",
+        correctAnswer: "continue",
+        audioText: "Ich möchte ein Brot kaufen. Ich hätte gern einen Apfel.",
+        color: "green"
+      },
+      {
+        id: "a1-13-flash-1",
+        type: "flashcard",
+        question: "Platiti",
+        questionDe: "bezahlen, die Kasse, das Bargeld",
+        explanation: "Platiti = bezahlen/zahlen. Die Kasse = kasa. Bar platiti = mit Bargeld bezahlen. Karticom = mit Karte bezahlen.",
+        correctAnswer: "continue",
+        audioText: "bezahlen, die Kasse, mit Karte bezahlen"
+      },
+      // Practice Phase
+      {
+        id: "a1-13-ex1",
+        type: "matching",
+        question: "Poveži prodavnice i proizvode.",
+        pairs: [
+          { de: "die Bäckerei", sr: "pekara - hleb" },
+          { de: "die Apotheke", sr: "apoteka - lekovi" },
+          { de: "die Metzgerei", sr: "mesara - meso" },
+          { de: "der Supermarkt", sr: "supermarket - sve" },
+          { de: "die Buchhandlung", sr: "knjižara - knjige" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Specijalizovane prodavnice su još uvek popularne u Nemačkoj."
+      },
+      {
+        id: "a1-13-ex2",
+        type: "multiple-choice",
+        question: "Gde kupiš hleb?",
+        questionDe: "Wo kaufst du Brot?",
+        options: ["In der Bäckerei", "In der Apotheke", "Im Kino", "Im Park"],
+        correctAnswer: "In der Bäckerei",
+        explanation: "Die Bäckerei = pekara. Lokativ: in DER Bäckerei."
+      },
+      {
+        id: "a1-13-ex3",
+        type: "fill-blank",
+        question: "Ich ___ ein Brot. (želeti)",
+        correctAnswer: "möchte",
+        hint: "Ich möchte...",
+        explanation: "Ich möchte = želeo bih (učtiva forma)."
+      },
+      {
+        id: "a1-13-ex4",
+        type: "translation",
+        question: "Prevedi: 'Koliko košta ovo?'",
+        correctAnswer: ["Wie viel kostet das?", "Was kostet das?"],
+        explanation: "Wie viel kostet das? ili Was kostet das? = Koliko ovo košta?"
+      },
+      {
+        id: "a1-13-ex5",
+        type: "multiple-choice",
+        question: "Das macht 15 Euro. Ich zahle mit ___.",
+        options: ["Karte", "Auto", "Freund", "Haus"],
+        correctAnswer: "Karte",
+        explanation: "Mit Karte zahlen = platiti karticom."
+      },
+      {
+        id: "a1-13-ex6",
+        type: "fill-blank",
+        question: "Können Sie mir helfen? Ich suche ___. (hleb)",
+        correctAnswer: "Brot",
+        explanation: "Ich suche = tražim. Das Brot = hleb."
+      },
+      {
+        id: "a1-13-ex7",
+        type: "matching",
+        question: "Poveži rečenice za kupovinu.",
+        pairs: [
+          { de: "Was kostet das?", sr: "Koliko košta ovo?" },
+          { de: "Ich hätte gern...", sr: "Imao bih rado..." },
+          { de: "Wo finde ich...?", sr: "Gde mogu naći...?" },
+          { de: "Mit Karte, bitte", sr: "Karticom, molim" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Korisne fraze za kupovinu."
+      },
+      {
+        id: "a1-13-ex8",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Guten Tag! Ich hätte gern drei Brötchen und eine Brezel.",
+        options: ["Dobar dan! Imao bih rado tri kifle i jedan perec.", "Dobar dan! Želim pet kiflica.", "Dobar dan! Gde je pekara?", "Dobro veče! Imate li hleb?"],
+        correctAnswer: "Dobar dan! Imao bih rado tri kifle i jedan perec.",
+        explanation: "Das Brötchen = kifla, die Brezel = perec."
+      },
+      {
+        id: "a1-13-ex9",
+        type: "fill-blank",
+        question: "An der Kasse: Das ___ zusammen 23 Euro. (činiti)",
+        correctAnswer: "macht",
+        hint: "Glagol machen",
+        explanation: "Das macht = to čini (za cenu). Das macht 23 Euro = to je 23 evra."
+      },
+      {
+        id: "a1-13-ex10",
+        type: "multiple-choice",
+        question: "Gde kupiš lek protiv glavobolje?",
+        options: ["In der Apotheke", "Im Supermarkt", "In der Bäckerei", "Im Bahnhof"],
+        correctAnswer: "In der Apotheke",
+        explanation: "Die Apotheke = apoteka. Lekovi se kupuju u apoteci."
+      }
+    ]
+  },
+  {
+    id: "a1-14",
+    title: "Prevoz i putovanje",
+    titleDe: "Verkehr und Reisen",
+    description: "Autobus, voz, avion, kupovina karata.",
+    level: "A1",
+    unit: 4,
+    order: 14,
+    duration: 30,
+    xpReward: 65,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Prevozna sredstva", "Fahren vs Gehen", "Prefiksi", "Lokacije u gradu"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "a1-14-learn-1",
+        type: "learn-card",
+        question: "Prevozna sredstva",
+        questionDe: "der Bus, der Zug, das Auto, das Fahrrad",
+        explanation: "Der Bus = autobus, der Zug = voz, das Auto = auto, das Fahrrad = bicikl, die U-Bahn = metro, die S-Bahn = prigradski voz, die Straßenbahn = tramvaj.",
+        correctAnswer: "continue",
+        audioText: "der Bus, der Zug, das Auto, das Fahrrad, die U-Bahn",
+        color: "blue"
+      },
+      {
+        id: "a1-14-learn-2",
+        type: "learn-card",
+        question: "Fahren ili Gehen?",
+        questionDe: "Ich fahre mit dem Bus. Ich gehe zu Fuß.",
+        explanation: "FAHREN = voziti se (sa vozilom): mit dem Bus/Auto/Zug/Fahrrad fahren. GEHEN = ići (pešice): zu Fuß gehen. Ich fahre nach Berlin (daleko), Ich gehe ins Kino (blizu).",
+        correctAnswer: "continue",
+        audioText: "Ich fahre mit dem Bus. Ich gehe zu Fuß.",
+        color: "green"
+      },
+      {
+        id: "a1-14-flash-1",
+        type: "flashcard",
+        question: "Kupovina karte",
+        questionDe: "die Fahrkarte, der Bahnhof, die Haltestelle",
+        explanation: "Die Fahrkarte = karta za vožnju, der Bahnhof = stanica (voz), die Haltestelle = stajalište (bus/tramvaj), die Einfahrkarte = karta u jednom pravcu, die Rückfahrkarte = povratna karta.",
+        correctAnswer: "continue",
+        audioText: "die Fahrkarte, der Bahnhof, die Haltestelle"
+      },
+      // Practice Phase
+      {
+        id: "a1-14-ex1",
+        type: "matching",
+        question: "Poveži prevozna sredstva.",
+        pairs: [
+          { de: "der Bus", sr: "autobus" },
+          { de: "der Zug", sr: "voz" },
+          { de: "das Fahrrad", sr: "bicikl" },
+          { de: "die U-Bahn", sr: "metro" },
+          { de: "das Flugzeug", sr: "avion" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Prevozna sredstva u Nemačkoj."
+      },
+      {
+        id: "a1-14-ex2",
+        type: "multiple-choice",
+        question: "Wie kommst du zur Arbeit?",
+        options: ["Mit dem Bus", "Zum Bus", "Der Bus", "Bus ist"],
+        correctAnswer: "Mit dem Bus",
+        explanation: "Mit + DEM (dativ) = sa/pomoću. Mit dem Bus = autobusom."
+      },
+      {
+        id: "a1-14-ex3",
+        type: "fill-blank",
+        question: "Ich ___ mit der U-Bahn. (voziti se)",
+        correctAnswer: "fahre",
+        hint: "Glagol fahren",
+        explanation: "Ich fahre = ja se vozim. Mit der U-Bahn fahren."
+      },
+      {
+        id: "a1-14-ex4",
+        type: "multiple-choice",
+        question: "Gde kupiš kartu za voz?",
+        questionDe: "Wo kaufst du eine Zugkarte?",
+        options: ["Am Bahnhof", "Im Restaurant", "Im Supermarkt", "Im Park"],
+        correctAnswer: "Am Bahnhof",
+        explanation: "Der Bahnhof = železnička stanica. Am Bahnhof = na stanici."
+      },
+      {
+        id: "a1-14-ex5",
+        type: "translation",
+        question: "Prevedi: 'Idem pešice.'",
+        correctAnswer: ["Ich gehe zu Fuß", "Ich gehe zu Fuß."],
+        explanation: "Zu Fuß gehen = ići pešice/pešaka."
+      },
+      {
+        id: "a1-14-ex6",
+        type: "matching",
+        question: "Poveži mesto i prevoz.",
+        pairs: [
+          { de: "der Flughafen", sr: "aerodrom" },
+          { de: "der Bahnhof", sr: "železnička stanica" },
+          { de: "die Haltestelle", sr: "stajalište" },
+          { de: "der Parkplatz", sr: "parking" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Mesta povezana sa prevozom."
+      },
+      {
+        id: "a1-14-ex7",
+        type: "fill-blank",
+        question: "Der Zug ___ um 10 Uhr ab. (polaziti)",
+        correctAnswer: "fährt",
+        hint: "Glagol abfahren",
+        explanation: "Abfahren = polaziti. Der Zug fährt ab = voz polazi."
+      },
+      {
+        id: "a1-14-ex8",
+        type: "multiple-choice",
+        question: "Koje prevozno sredstvo ima dva točka?",
+        questionDe: "Welches Verkehrsmittel hat zwei Räder?",
+        options: ["Das Fahrrad", "Das Auto", "Der Bus", "Der Zug"],
+        correctAnswer: "Das Fahrrad",
+        explanation: "Das Fahrrad = bicikl (ima dva točka - zwei Räder)."
+      },
+      {
+        id: "a1-14-ex9",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Der Zug nach München fährt um 15:30 Uhr vom Gleis 7 ab.",
+        options: ["Voz za Minhen polazi u 15:30 sa perona 7.", "Voz za Berlin stiže u 15:30.", "Autobus za Minhen kreće.", "Voz stoji na peronu 7."],
+        correctAnswer: "Voz za Minhen polazi u 15:30 sa perona 7.",
+        explanation: "Abfahren = polaziti, das Gleis = peron."
+      },
+      {
+        id: "a1-14-ex10",
+        type: "fill-blank",
+        question: "Ich fahre jeden Tag ___ dem Fahrrad zur Schule. (sa/pomoću)",
+        correctAnswer: "mit",
+        explanation: "Mit + dativ = sa/pomoću. Mit dem Fahrrad = biciklom."
+      }
+    ]
+  },
+  {
+    id: "a1-15",
+    title: "Aktivnosti slobodnog vremena",
+    titleDe: "Freizeitaktivitäten",
+    description: "Hobiji, sport, muzika, čitanje.",
+    level: "A1",
+    unit: 5,
+    order: 15,
+    duration: 30,
+    xpReward: 65,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Hobiji", "Glagoli sa akuzativom", "Sport", "In meiner Freizeit"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "a1-15-learn-1",
+        type: "learn-card",
+        question: "Slobodno vreme",
+        questionDe: "die Freizeit, das Hobby",
+        explanation: "Die Freizeit = slobodno vreme, das Hobby = hobi. In meiner Freizeit... (U mom slobodnom vremenu...). Popularne aktivnosti: Sport machen, Musik hören, lesen, schwimmen.",
+        correctAnswer: "continue",
+        audioText: "die Freizeit, das Hobby, Sport machen, Musik hören",
+        color: "purple"
+      },
+      {
+        id: "a1-15-learn-2",
+        type: "learn-card",
+        question: "Sportovi",
+        questionDe: "Fußball spielen, schwimmen, laufen",
+        explanation: "Sport treiben/machen = baviti se sportom. Fußball spielen = igrati fudbal, schwimmen = plivati, laufen = trčati, Rad fahren = voziti bicikl, Tennis spielen = igrati tenis.",
+        correctAnswer: "continue",
+        audioText: "Fußball spielen, schwimmen, laufen, Tennis spielen",
+        color: "blue"
+      },
+      {
+        id: "a1-15-flash-1",
+        type: "flashcard",
+        question: "Glagol spielen",
+        questionDe: "Ich spiele Gitarre. Ich spiele Fußball.",
+        explanation: "Spielen = igrati/svirati. Muzički instrument = OHNE Artikel (Gitarre spielen), Sport = MIT Artikel (Fußball spielen). Ich spiele gern... = volim da igram/sviram...",
+        correctAnswer: "continue",
+        audioText: "Ich spiele Gitarre. Ich spiele Fußball."
+      },
+      // Practice Phase
+      {
+        id: "a1-15-ex1",
+        type: "matching",
+        question: "Poveži hobije.",
+        pairs: [
+          { de: "lesen", sr: "čitati" },
+          { de: "schwimmen", sr: "plivati" },
+          { de: "tanzen", sr: "plesati" },
+          { de: "kochen", sr: "kuvati" },
+          { de: "wandern", sr: "planinariti" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Popularni hobiji u Nemačkoj."
+      },
+      {
+        id: "a1-15-ex2",
+        type: "fill-blank",
+        question: "Ich ___ gern Bücher. (čitati)",
+        correctAnswer: "lese",
+        hint: "Glagol lesen",
+        explanation: "Ich lese = ja čitam. Lesen je nepravilan glagol (e→ie)."
+      },
+      {
+        id: "a1-15-ex3",
+        type: "multiple-choice",
+        question: "Welchen Sport machst du?",
+        options: ["Ich spiele Fußball", "Ich esse Fußball", "Ich trinke Sport", "Ich schlafe Sport"],
+        correctAnswer: "Ich spiele Fußball",
+        explanation: "Sport spielen ili Sport machen. Fußball spielen = igrati fudbal."
+      },
+      {
+        id: "a1-15-ex4",
+        type: "matching",
+        question: "Poveži sportove.",
+        pairs: [
+          { de: "Fußball", sr: "fudbal" },
+          { de: "Basketball", sr: "košarka" },
+          { de: "Tennis", sr: "tenis" },
+          { de: "Volleyball", sr: "odbojka" },
+          { de: "Handball", sr: "rukomet" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Popularni sportovi."
+      },
+      {
+        id: "a1-15-ex5",
+        type: "translation",
+        question: "Prevedi: 'Sviram gitaru.'",
+        correctAnswer: ["Ich spiele Gitarre", "Ich spiele Gitarre."],
+        explanation: "Gitarre spielen = svirati gitaru (bez člana!)"
+      },
+      {
+        id: "a1-15-ex6",
+        type: "fill-blank",
+        question: "In meiner Freizeit ___ ich gern Musik. (slušati)",
+        correctAnswer: "höre",
+        hint: "Glagol hören",
+        explanation: "Ich höre Musik = slušam muziku."
+      },
+      {
+        id: "a1-15-ex7",
+        type: "matching",
+        question: "Poveži muzičke instrumente.",
+        pairs: [
+          { de: "die Gitarre", sr: "gitara" },
+          { de: "das Klavier", sr: "klavir" },
+          { de: "die Geige", sr: "violina" },
+          { de: "die Flöte", sr: "flauta" },
+          { de: "das Schlagzeug", sr: "bubnjevi" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Muzički instrumenti se sviraju BEZ člana!"
+      },
+      {
+        id: "a1-15-ex8",
+        type: "multiple-choice",
+        question: "Was machst du gern in deiner Freizeit?",
+        options: ["Ich lese gern", "Ich arbeite gern", "Ich lerne gern", "Ich schlafe nie"],
+        correctAnswer: "Ich lese gern",
+        explanation: "In der Freizeit = u slobodno vreme (ne radi se!)."
+      },
+      {
+        id: "a1-15-ex9",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Mein Hobby ist Schwimmen. Ich gehe zweimal pro Woche ins Schwimmbad.",
+        options: ["Moj hobi je plivanje. Idem dva puta nedeljno u bazen.", "Moj hobi je trčanje. Trčim svaki dan.", "Volim fudbal. Igram svaki dan.", "Idem u teretanu."],
+        correctAnswer: "Moj hobi je plivanje. Idem dva puta nedeljno u bazen.",
+        explanation: "Das Schwimmbad = bazen. Zweimal pro Woche = dva puta nedeljno."
+      },
+      {
+        id: "a1-15-ex10",
+        type: "fill-blank",
+        question: "Ich ___ jeden Tag joggen. (ići)",
+        correctAnswer: "gehe",
+        explanation: "Joggen gehen = ići trčati/džogirati. Ich gehe joggen."
+      }
+    ]
+  }
+
+  // ==========================================
   // A2 LEVEL - OSNOVNI (10 Lekcija)
   // ==========================================
 ]

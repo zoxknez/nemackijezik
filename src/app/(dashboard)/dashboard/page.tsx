@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button"
 import { LevelBadge } from "@/components/ui/badge"
 import { DashboardBackground } from "@/components/background"
 import { Progress } from "@/components/ui/progress"
+import { PersonalizedRecommendations } from "@/components/dashboard/PersonalizedRecommendations"
+import { ProgressVisualization } from "@/components/dashboard/ProgressVisualization"
+import { QuickActions } from "@/components/dashboard/QuickActions"
+import { MotivationalWidget } from "@/components/dashboard/MotivationalWidget"
 import Link from "next/link"
 import {
   BookOpen,
@@ -288,39 +292,25 @@ export default async function DashboardPage() {
                 </div>
               </div>
 
-              {/* Recommended Lessons */}
-              <div>
-                <div className="mb-3 sm:mb-4 flex items-center justify-between">
-                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                    <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />
-                    Preporučeno za tebe
-                  </h3>
-                </div>
-                <div className="space-y-3 sm:space-y-0 sm:grid sm:gap-4 sm:grid-cols-2">
-                  {recommendedLessons.map((lesson) => (
-                    <GlassCard 
-                      key={lesson.id}
-                      className="group p-3 sm:p-4 transition-all hover:bg-white/10 cursor-pointer"
-                    >
-                      <div className="flex items-center justify-between mb-2 sm:mb-3">
-                        <LevelBadge level={lesson.level as Level} />
-                        <span className="text-xs text-muted-foreground shrink-0">{lesson.time}</span>
-                      </div>
-                      <h4 className="font-medium text-white text-sm sm:text-base group-hover:text-german-gold transition-colors">
-                        {lesson.title}
-                      </h4>
-                      <p className="text-xs text-german-gold/60 mb-2 sm:mb-3">{lesson.titleDe}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-german-gold flex items-center gap-1">
-                          <Zap className="h-3 w-3" />
-                          +{lesson.xp} XP
-                        </span>
-                        <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-white group-hover:translate-x-1 transition-all shrink-0" />
-                      </div>
-                    </GlassCard>
-                  ))}
-                </div>
-              </div>
+              {/* Personalized Recommendations */}
+              <PersonalizedRecommendations 
+                userLevel={userStats.level}
+                recentActivity={[]}
+                weakAreas={["Artikli", "Akuzativ"]}
+                streak={userStats.streak}
+              />
+
+              {/* Quick Actions */}
+              <QuickActions />
+
+              {/* Progress Visualization */}
+              <ProgressVisualization
+                weeklyActivity={weeklyActivity}
+                dailyGoal={userStats.dailyGoal}
+                todayXp={userStats.todayXp}
+                streak={userStats.streak}
+                maxStreak={14}
+              />
 
               {/* Recent Lessons List */}
               <div>
@@ -413,6 +403,9 @@ export default async function DashboardPage() {
 
             {/* Right Column - Stats & Quick Actions */}
             <div className="space-y-4 sm:space-y-6">
+              {/* Motivational Widget */}
+              <MotivationalWidget />
+
               {/* Daily Goal */}
               <GlassCard className="p-4 sm:p-6">
                 <div className="mb-3 sm:mb-4 flex items-center justify-between">

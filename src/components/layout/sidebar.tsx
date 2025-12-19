@@ -23,6 +23,7 @@ import {
   Sparkles,
   MessageCircle,
   Library,
+  Users,
 } from "lucide-react"
 
 const mainNavItems = [
@@ -33,6 +34,7 @@ const mainNavItems = [
   { href: "/vezbe", label: "Vežbe", icon: Dumbbell },
   { href: "/ai-tutor", label: "AI Tutor", icon: Sparkles },
   { href: "/chat", label: "Razgovor", icon: MessageCircle },
+  { href: "/zajednica", label: "Zajednica", icon: Users },
 ]
 
 const bottomNavItems = [

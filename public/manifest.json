@@ -8,6 +8,11 @@
   "theme_color": "#FFCE00",
   "orientation": "portrait-primary",
   "scope": "/",
+  "lang": "sr",
+  "dir": "ltr",
+  "categories": ["education", "learning", "languages"],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icons/icon-72x72.png",

@@ -1181,4 +1181,294 @@ export const b2Lessons: Lesson[] = [
       }
     ]
   },
+  {
+    id: "b2-9",
+    title: "Digitalizacija i tehnologija",
+    titleDe: "Digitalisierung und Technologie",
+    description: "AI, big data, cyber sigurnost, budućnost tehnologije.",
+    level: "B2",
+    unit: 3,
+    order: 9,
+    duration: 50,
+    xpReward: 135,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Tehnološki razvoj", "Futur II", "Nominalizacija"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "b2-9-learn-1",
+        type: "learn-card",
+        question: "Digitalizacija",
+        questionDe: "die Künstliche Intelligenz, die Automatisierung",
+        explanation: "Die künstliche Intelligenz (KI) = veštačka inteligencija (AI), die Automatisierung = automatizacija, die Digitalisierung = digitalizacija, der Algorithmus = algoritam, die Datensicherheit = sigurnost podataka, der Cloud-Speicher = cloud skladište.",
+        correctAnswer: "continue",
+        audioText: "die künstliche Intelligenz, die Automatisierung, die Digitalisierung",
+        color: "cyan"
+      },
+      {
+        id: "b2-9-learn-2",
+        type: "learn-card",
+        question: "Futur II (budućnost u prošlosti)",
+        questionDe: "Bis morgen werde ich die Arbeit beendet haben.",
+        explanation: "FUTUR II = werden + Partizip II + haben/sein. Koristi se za radnju koja će biti ZAVRŠENA u budućnosti. Bis morgen werde ich beendet HABEN = Do sutra ću završiti. In 5 Jahren wird er umgezogen SEIN = Za 5 godina će se preseliti.",
+        correctAnswer: "continue",
+        audioText: "Bis morgen werde ich die Arbeit beendet haben.",
+        color: "green"
+      },
+      {
+        id: "b2-9-flash-1",
+        type: "flashcard",
+        question: "Nominalizacija glagola",
+        questionDe: "arbeiten → die Arbeit, lernen → das Lernen",
+        explanation: "Glagoli postaju imenice: Infinitiv + DAS = das Lernen, das Essen, das Arbeiten. Ili dodaj nastavke: -ung (die Entwicklung), -heit (die Freiheit), -keit (die Möglichkeit). Nominalizacija čini jezik formalnijim!",
+        correctAnswer: "continue",
+        audioText: "das Lernen, die Entwicklung, die Möglichkeit"
+      },
+      // Practice Phase
+      {
+        id: "b2-9-ex1",
+        type: "matching",
+        question: "Poveži tehnološke pojmove.",
+        pairs: [
+          { de: "die künstliche Intelligenz", sr: "veštačka inteligencija" },
+          { de: "der Algorithmus", sr: "algoritam" },
+          { de: "die Datensicherheit", sr: "sigurnost podataka" },
+          { de: "die Cloud", sr: "oblak/cloud" },
+          { de: "die Verschlüsselung", sr: "enkripcija" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Moderna tehnologija."
+      },
+      {
+        id: "b2-9-ex2",
+        type: "fill-blank",
+        question: "Bis nächste Woche ___ ich das Projekt abgeschlossen haben. (werden)",
+        correctAnswer: "werde",
+        hint: "Futur II",
+        explanation: "Futur II: werde + Partizip II + haben."
+      },
+      {
+        id: "b2-9-ex3",
+        type: "multiple-choice",
+        question: "Was ist KI?",
+        options: ["Künstliche Intelligenz", "Keine Idee", "Kleine Information", "Kultur Institut"],
+        correctAnswer: "Künstliche Intelligenz",
+        explanation: "KI = künstliche Intelligenz = AI (veštačka inteligencija)."
+      },
+      {
+        id: "b2-9-ex4",
+        type: "matching",
+        question: "Poveži glagol sa nominalizacijom.",
+        pairs: [
+          { de: "arbeiten", sr: "die Arbeit" },
+          { de: "entwickeln", sr: "die Entwicklung" },
+          { de: "lernen", sr: "das Lernen" },
+          { de: "denken", sr: "das Denken" },
+          { de: "entscheiden", sr: "die Entscheidung" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Glagoli postaju imenice."
+      },
+      {
+        id: "b2-9-ex5",
+        type: "translation",
+        question: "Prevedi: 'Do kraja godine ću završiti studije.'",
+        correctAnswer: ["Bis Ende des Jahres werde ich das Studium abgeschlossen haben", "Bis zum Jahresende werde ich mein Studium beendet haben"],
+        explanation: "Futur II za završenu radnju u budućnosti."
+      },
+      {
+        id: "b2-9-ex6",
+        type: "fill-blank",
+        question: "Die ___ der persönlichen Daten ist sehr wichtig. (zaštita)",
+        correctAnswer: "Sicherheit",
+        hint: "Nominalizacija",
+        explanation: "Die Sicherheit = sigurnost/zaštita (od sicher = siguran)."
+      },
+      {
+        id: "b2-9-ex7",
+        type: "multiple-choice",
+        question: "Was speichert man in der Cloud?",
+        options: ["Daten", "Essen", "Möbel", "Tiere"],
+        correctAnswer: "Daten",
+        explanation: "Die Cloud = cloud skladište za podatke (Daten)."
+      },
+      {
+        id: "b2-9-ex8",
+        type: "matching",
+        question: "Poveži prednosti i mane tehnologije.",
+        pairs: [
+          { de: "der Vorteil", sr: "prednost" },
+          { de: "der Nachteil", sr: "mana" },
+          { de: "die Effizienz", sr: "efikasnost" },
+          { de: "die Abhängigkeit", sr: "zavisnost" },
+          { de: "der Fortschritt", sr: "napredak" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Diskusija o tehnologiji."
+      },
+      {
+        id: "b2-9-ex9",
+        type: "fill-blank",
+        question: "Durch die ___ werden viele Prozesse automatisiert. (digitalizacija)",
+        correctAnswer: "Digitalisierung",
+        explanation: "Die Digitalisierung = digitalizacija (proces)."
+      },
+      {
+        id: "b2-9-ex10",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "In zehn Jahren wird die künstliche Intelligenz einen großen Einfluss auf unseren Alltag gehabt haben.",
+        options: ["Za deset godina, veštačka inteligencija će imati veliki uticaj na našu svakodnevicu.", "AI ne postoji.", "AI neće uticati na život.", "AI je već svuda."],
+        correctAnswer: "Za deset godina, veštačka inteligencija će imati veliki uticaj na našu svakodnevicu.",
+        explanation: "Futur II + der Einfluss = uticaj, der Alltag = svakodnevica."
+      }
+    ]
+  },
+  {
+    id: "b2-10",
+    title: "Globalizacija i multikulturalizam",
+    titleDe: "Globalisierung und Multikulturalismus",
+    description: "Prednosti i izazovi globalizacije, migracija, integracija.",
+    level: "B2",
+    unit: 3,
+    order: 10,
+    duration: 55,
+    xpReward: 140,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Globalizacija", "Erweiterte Partizipialkonstruktion", "Akademski jezik"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "b2-10-learn-1",
+        type: "learn-card",
+        question: "Globalizacija",
+        questionDe: "die Globalisierung, die Migration, die Integration",
+        explanation: "Die Globalisierung = globalizacija, die Migration = migracija, die Integration = integracija, die Vielfalt = raznolikost, der Austausch = razmena, die Herausforderung = izazov, die Chance = šansa/prilika.",
+        correctAnswer: "continue",
+        audioText: "die Globalisierung, die Migration, die Integration, die Vielfalt",
+        color: "orange"
+      },
+      {
+        id: "b2-10-learn-2",
+        type: "learn-card",
+        question: "Proširena participska konstrukcija",
+        questionDe: "die vor zwei Jahren gebaute Schule",
+        explanation: "Umesto relativne rečenice, koristimo PARTICIP kao pridev: Die Schule, die vor zwei Jahren GEBAUT WURDE = die vor zwei Jahren GEBAUTE Schule. Particip + pridevski nastavak ide PRE imenice. Zvuči formalno i akademski!",
+        correctAnswer: "continue",
+        audioText: "die vor zwei Jahren gebaute Schule, die schnell wachsende Bevölkerung",
+        color: "blue"
+      },
+      {
+        id: "b2-10-flash-1",
+        type: "flashcard",
+        question: "Akademski vokabular",
+        questionDe: "infolgedessen, demzufolge, diesbezüglich",
+        explanation: "Formalni izrazi: infolgedessen / demzufolge = shodno tome, diesbezüglich = u vezi sa tim, hinsichtlich = u pogledu, inwiefern = u kojoj meri, demnach = prema tome.",
+        correctAnswer: "continue",
+        audioText: "infolgedessen, demzufolge, diesbezüglich, hinsichtlich"
+      },
+      // Practice Phase
+      {
+        id: "b2-10-ex1",
+        type: "matching",
+        question: "Poveži pojmove globalizacije.",
+        pairs: [
+          { de: "die Globalisierung", sr: "globalizacija" },
+          { de: "die Vielfalt", sr: "raznolikost" },
+          { de: "der Austausch", sr: "razmena" },
+          { de: "die Herausforderung", sr: "izazov" },
+          { de: "die Chance", sr: "šansa" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Ključni pojmovi o globalizaciji."
+      },
+      {
+        id: "b2-10-ex2",
+        type: "fill-blank",
+        question: "Die ___ Bevölkerung stellt neue Anforderungen. (rastuća)",
+        correctAnswer: "wachsende",
+        hint: "Partizip I",
+        explanation: "Wachsen → wachsend → wachsende (rastuća). Partizip I kao pridev."
+      },
+      {
+        id: "b2-10-ex3",
+        type: "multiple-choice",
+        question: "Was ist ein Vorteil der Globalisierung?",
+        options: ["Kultureller Austausch", "Isolation", "Weniger Kommunikation", "Keine Veränderung"],
+        correctAnswer: "Kultureller Austausch",
+        explanation: "Kultureller Austausch = kulturna razmena je prednost."
+      },
+      {
+        id: "b2-10-ex4",
+        type: "matching",
+        question: "Poveži formalne izraze.",
+        pairs: [
+          { de: "infolgedessen", sr: "shodno tome" },
+          { de: "diesbezüglich", sr: "u vezi sa tim" },
+          { de: "hinsichtlich", sr: "u pogledu" },
+          { de: "demnach", sr: "prema tome" },
+          { de: "inwiefern", sr: "u kojoj meri" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Akademski/formalni jezik."
+      },
+      {
+        id: "b2-10-ex5",
+        type: "translation",
+        question: "Prevedi: 'Kulturna raznolikost je bogatstvo.'",
+        correctAnswer: ["Die kulturelle Vielfalt ist ein Reichtum", "Kulturelle Vielfalt ist Reichtum"],
+        explanation: "Die Vielfalt = raznolikost, der Reichtum = bogatstvo."
+      },
+      {
+        id: "b2-10-ex6",
+        type: "fill-blank",
+        question: "Die ___ ist ein komplexer Prozess. (integracija)",
+        correctAnswer: "Integration",
+        explanation: "Die Integration = integracija (proces uključivanja)."
+      },
+      {
+        id: "b2-10-ex7",
+        type: "multiple-choice",
+        question: "Pretvori u participsku konstrukciju: 'Die Probleme, die diskutiert werden...'",
+        options: ["Die diskutierten Probleme", "Die Probleme diskutiert", "Diskutierte die Probleme", "Die Problem diskutieren"],
+        correctAnswer: "Die diskutierten Probleme",
+        explanation: "Partizip II + pridevski nastavak. Diskutiert + en = diskutierten."
+      },
+      {
+        id: "b2-10-ex8",
+        type: "matching",
+        question: "Poveži sa migracijom.",
+        pairs: [
+          { de: "der Immigrant", sr: "imigrant" },
+          { de: "der Flüchtling", sr: "izbeglica" },
+          { de: "das Asyl", sr: "azil" },
+          { de: "die Einwanderung", sr: "useljavanje" },
+          { de: "die Staatsangehörigkeit", sr: "državljanstvo" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Vokabular migracije."
+      },
+      {
+        id: "b2-10-ex9",
+        type: "fill-blank",
+        question: "___ nimmt der Einfluss der Globalisierung zu. (prema tome)",
+        correctAnswer: "Demnach",
+        hint: "Formalni izraz",
+        explanation: "Demnach = prema tome (formalno)."
+      },
+      {
+        id: "b2-10-ex10",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Die in den letzten Jahren gestiegene Migration hat zu einer größeren kulturellen Vielfalt geführt.",
+        options: ["Migracija koja je porasla u poslednjim godinama dovela je do veće kulturne raznolikosti.", "Migracija je prestala.", "Nema kulturne raznolikosti.", "Sve je isto kao ranije."],
+        correctAnswer: "Migracija koja je porasla u poslednjim godinama dovela je do veće kulturne raznolikosti.",
+        explanation: "Proširena participska konstrukcija: 'die gestiegene Migration' = migracija koja je porasla."
+      }
+    ]
+  }
 ]

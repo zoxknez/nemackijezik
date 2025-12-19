@@ -918,4 +918,293 @@ export const c1Lessons: Lesson[] = [
       }
     ]
   },
+  {
+    id: "c1-7",
+    title: "Akademsko pisanje i istraživanje",
+    titleDe: "Akademisches Schreiben und Forschung",
+    description: "Metode istraživanja, citiranje, struktura naučnog rada.",
+    level: "C1",
+    unit: 2,
+    order: 7,
+    duration: 65,
+    xpReward: 170,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Struktura akademskog teksta", "Naučna metodologija", "Citati i reference"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "c1-7-learn-1",
+        type: "learn-card",
+        question: "Struktura akademskog rada",
+        questionDe: "Einleitung, Hauptteil, Schluss",
+        explanation: "Struktura: 1) EINLEITUNG (uvod) - teza, ciljevi, pregled. 2) HAUPTTEIL (glavni deo) - argumentacija, analiza, dokazi. 3) SCHLUSS (zaključak) - sinteza, implikacije. Takođe: Abstract, Literaturverzeichnis (bibliografija).",
+        correctAnswer: "continue",
+        audioText: "Einleitung, Hauptteil, Schluss, Literaturverzeichnis",
+        color: "purple"
+      },
+      {
+        id: "c1-7-learn-2",
+        type: "learn-card",
+        question: "Naučne metode",
+        questionDe: "quantitativ, qualitativ, empirisch",
+        explanation: "Metode: QUANTITATIV (kvantitativni) - statistika, brojke. QUALITATIV (kvalitativni) - intervjui, opažanje. EMPIRISCH (empirijski) - zasnovano na iskustvu/podacima. THEORETISCH (teorijski) - konceptualna analiza.",
+        correctAnswer: "continue",
+        audioText: "quantitative Methode, qualitative Forschung, empirische Daten",
+        color: "blue"
+      },
+      {
+        id: "c1-7-flash-1",
+        type: "flashcard",
+        question: "Citiranje",
+        questionDe: "laut/nach X, X zufolge, wie X betont",
+        explanation: "Načini citiranja: Laut/Nach Schmidt (2020)... = Prema Schmidt-u. Schmidt (2020) zufolge... = Prema Schmidt-u. Wie Schmidt (2020) betont, ... = Kao što Schmidt naglašava. WICHTIG: Plagiat je ozbiljno kršenje!",
+        correctAnswer: "continue",
+        audioText: "Laut Schmidt, nach der Theorie, wie die Forschung zeigt"
+      },
+      // Practice Phase
+      {
+        id: "c1-7-ex1",
+        type: "matching",
+        question: "Poveži delove naučnog rada.",
+        pairs: [
+          { de: "die Einleitung", sr: "uvod" },
+          { de: "der Hauptteil", sr: "glavni deo" },
+          { de: "der Schluss", sr: "zaključak" },
+          { de: "das Literaturverzeichnis", sr: "bibliografija" },
+          { de: "die Hypothese", sr: "hipoteza" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Struktura akademskog teksta."
+      },
+      {
+        id: "c1-7-ex2",
+        type: "fill-blank",
+        question: "___ Schmidt (2020) sind die Ergebnisse signifikant. (prema)",
+        correctAnswer: "Laut",
+        hint: "Laut/Nach",
+        explanation: "Laut/Nach + ime = Prema nekome."
+      },
+      {
+        id: "c1-7-ex3",
+        type: "multiple-choice",
+        question: "Koja metoda koristi intervjue i opažanja?",
+        options: ["Qualitative Methode", "Quantitative Methode", "Mathematische Methode", "Keine Methode"],
+        correctAnswer: "Qualitative Methode",
+        explanation: "Qualitative Forschung = kvalitativno istraživanje (intervjui, etnografija)."
+      },
+      {
+        id: "c1-7-ex4",
+        type: "matching",
+        question: "Poveži metodološke termine.",
+        pairs: [
+          { de: "die Stichprobe", sr: "uzorak" },
+          { de: "die Variable", sr: "promenljiva" },
+          { de: "die Korrelation", sr: "korelacija" },
+          { de: "die Validität", sr: "validnost" },
+          { de: "die Reliabilität", sr: "pouzdanost" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Osnovni naučni termini."
+      },
+      {
+        id: "c1-7-ex5",
+        type: "translation",
+        question: "Prevedi: 'Ova studija ima za cilj da ispita odnos između X i Y.'",
+        correctAnswer: ["Diese Studie zielt darauf ab, die Beziehung zwischen X und Y zu untersuchen", "Das Ziel dieser Studie ist es, den Zusammenhang zwischen X und Y zu erforschen"],
+        explanation: "Akademski stil za izražavanje cilja istraživanja."
+      },
+      {
+        id: "c1-7-ex6",
+        type: "fill-blank",
+        question: "Die ___ zeigt einen signifikanten Zusammenhang. (analiza)",
+        correctAnswer: "Analyse",
+        explanation: "Die Analyse = analiza (ključan deo istraživanja)."
+      },
+      {
+        id: "c1-7-ex7",
+        type: "multiple-choice",
+        question: "Wie nennt man eine unbewiesene Annahme?",
+        options: ["Hypothese", "Theorie", "Fakt", "Beweis"],
+        correctAnswer: "Hypothese",
+        explanation: "Die Hypothese = hipoteza (nepotvrđena pretpostavka)."
+      },
+      {
+        id: "c1-7-ex8",
+        type: "matching",
+        question: "Poveži akademske glagole.",
+        pairs: [
+          { de: "untersuchen", sr: "ispitati/istražiti" },
+          { de: "analysieren", sr: "analizirati" },
+          { de: "erörtern", sr: "raspraviti" },
+          { de: "belegen", sr: "dokazati" },
+          { de: "widerlegen", sr: "opovrgnuti" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Glagoli za akademsko pisanje."
+      },
+      {
+        id: "c1-7-ex9",
+        type: "fill-blank",
+        question: "Die Forschung ___ neue Erkenntnisse. (doneti)",
+        correctAnswer: "bringt",
+        hint: "Glagol bringen",
+        explanation: "Erkenntnisse bringen = doneti saznanja."
+      },
+      {
+        id: "c1-7-ex10",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Wie die empirischen Daten belegen, besteht ein signifikanter Zusammenhang zwischen den beiden Variablen, was die anfängliche Hypothese bestätigt.",
+        options: ["Kao što empirijski podaci dokazuju, postoji značajna veza između dve promenljive, što potvrđuje početnu hipotezu.", "Nema dokaza za hipotezu.", "Podaci su nevažni.", "Veza ne postoji."],
+        correctAnswer: "Kao što empirijski podaci dokazuju, postoji značajna veza između dve promenljive, što potvrđuje početnu hipotezu.",
+        explanation: "Belegen = dokazati, der Zusammenhang = veza, bestätigen = potvrditi."
+      }
+    ]
+  },
+  {
+    id: "c1-8",
+    title: "Etika, moral i društvena pravda",
+    titleDe: "Ethik, Moral und soziale Gerechtigkeit",
+    description: "Etičke dileme, pravda, ljudska prava, bioetika.",
+    level: "C1",
+    unit: 3,
+    order: 8,
+    duration: 60,
+    xpReward: 165,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Etički pojmovi", "Argumentacija", "Moralni sudovi"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "c1-8-learn-1",
+        type: "learn-card",
+        question: "Etički pojmovi",
+        questionDe: "die Ethik, die Moral, die Gerechtigkeit",
+        explanation: "Die Ethik = etika (nauka o moralu), die Moral = moral (norma ponašanja), die Gerechtigkeit = pravda, das Gewissen = savest, die Pflicht = dužnost, das Recht = pravo, die Verantwortung = odgovornost.",
+        correctAnswer: "continue",
+        audioText: "die Ethik, die Moral, die Gerechtigkeit, das Gewissen",
+        color: "red"
+      },
+      {
+        id: "c1-8-learn-2",
+        type: "learn-card",
+        question: "Etički pravci",
+        questionDe: "Deontologie, Utilitarismus, Tugendethik",
+        explanation: "DEONTOLOGIE (deontologija) - dužnosti, Kant. UTILITARISMUS (utilitarizam) - najveća sreća najvećeg broja. TUGENDETHIK (etika vrline) - razvoj karaktera, Aristotel. Različiti pristupi etičkim pitanjima!",
+        correctAnswer: "continue",
+        audioText: "Deontologie, Utilitarismus, Tugendethik",
+        color: "orange"
+      },
+      {
+        id: "c1-8-flash-1",
+        type: "flashcard",
+        question: "Bioetika",
+        questionDe: "Sterbehilfe, Abtreibung, Klonen",
+        explanation: "Kontroverzne teme bioetike: die Sterbehilfe = eutanazija, die Abtreibung = abortus, das Klonen = kloniranje, die Stammzellenforschung = istraživanje matičnih ćelija, die Gentechnik = genetičko inženjerstvo.",
+        correctAnswer: "continue",
+        audioText: "die Sterbehilfe, die Gentechnik, bioethische Fragen"
+      },
+      // Practice Phase
+      {
+        id: "c1-8-ex1",
+        type: "matching",
+        question: "Poveži etičke pojmove.",
+        pairs: [
+          { de: "die Gerechtigkeit", sr: "pravda" },
+          { de: "das Gewissen", sr: "savest" },
+          { de: "die Pflicht", sr: "dužnost" },
+          { de: "die Verantwortung", sr: "odgovornost" },
+          { de: "die Würde", sr: "dostojanstvo" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Ključni etički termini."
+      },
+      {
+        id: "c1-8-ex2",
+        type: "fill-blank",
+        question: "Jeder Mensch hat eine ___ gegenüber der Gesellschaft. (odgovornost)",
+        correctAnswer: "Verantwortung",
+        explanation: "Die Verantwortung = odgovornost (moralna ili pravna)."
+      },
+      {
+        id: "c1-8-ex3",
+        type: "multiple-choice",
+        question: "Koji etički pravac naglašava dužnost?",
+        options: ["Deontologie", "Utilitarismus", "Hedonismus", "Nihilismus"],
+        correctAnswer: "Deontologie",
+        explanation: "Deontologija (Kant) = etika dužnosti."
+      },
+      {
+        id: "c1-8-ex4",
+        type: "matching",
+        question: "Poveži bioetičke teme.",
+        pairs: [
+          { de: "die Sterbehilfe", sr: "eutanazija" },
+          { de: "das Klonen", sr: "kloniranje" },
+          { de: "die Abtreibung", sr: "abortus" },
+          { de: "die Gentechnik", sr: "genetičko inženjerstvo" },
+          { de: "die Stammzellenforschung", sr: "istraživanje matičnih ćelija" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Kontroverzne bioetičke teme."
+      },
+      {
+        id: "c1-8-ex5",
+        type: "translation",
+        question: "Prevedi: 'Ljudsko dostojanstvo je nepovredivo.'",
+        correctAnswer: ["Die Menschenwürde ist unantastbar", "Die menschliche Würde ist unantastbar"],
+        explanation: "Prvi član nemačkog Osnovnog zakona. Unantastbar = nepovrediv."
+      },
+      {
+        id: "c1-8-ex6",
+        type: "fill-blank",
+        question: "Das ___ spielt eine wichtige Rolle bei moralischen Entscheidungen. (savest)",
+        correctAnswer: "Gewissen",
+        explanation: "Das Gewissen = savest (unutrašnji moralni kompas)."
+      },
+      {
+        id: "c1-8-ex7",
+        type: "multiple-choice",
+        question: "Was ist das Ziel des Utilitarismus?",
+        options: ["Das größte Glück der größten Zahl", "Pflichterfüllung", "Persönliche Tugend", "Absolute Freiheit"],
+        correctAnswer: "Das größte Glück der größten Zahl",
+        explanation: "Utilitarizam = maksimizacija sreće najvećeg broja."
+      },
+      {
+        id: "c1-8-ex8",
+        type: "matching",
+        question: "Poveži sa ljudskim pravima.",
+        pairs: [
+          { de: "die Meinungsfreiheit", sr: "sloboda mišljenja" },
+          { de: "das Wahlrecht", sr: "pravo glasa" },
+          { de: "die Religionsfreiheit", sr: "sloboda veroispovesti" },
+          { de: "das Recht auf Bildung", sr: "pravo na obrazovanje" },
+          { de: "die Versammlungsfreiheit", sr: "sloboda okupljanja" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Osnovna ljudska prava."
+      },
+      {
+        id: "c1-8-ex9",
+        type: "fill-blank",
+        question: "Die ___ zwischen Arm und Reich nimmt zu. (nejednakost)",
+        correctAnswer: "Ungleichheit",
+        hint: "Die Ungleichheit",
+        explanation: "Die Ungleichheit = nejednakost (socijalna/ekonomska)."
+      },
+      {
+        id: "c1-8-ex10",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Nach Kant darf der Mensch niemals bloß als Mittel, sondern muss stets zugleich als Zweck behandelt werden. Dies ist der kategorische Imperativ.",
+        options: ["Prema Kantu, čovek nikad ne sme biti tretiran samo kao sredstvo, već uvek i kao cilj. To je kategorički imperativ.", "Kant kaže da ljudi nisu važni.", "Kategorički imperativ ne postoji.", "Čovek je samo sredstvo."],
+        correctAnswer: "Prema Kantu, čovek nikad ne sme biti tretiran samo kao sredstvo, već uvek i kao cilj. To je kategorički imperativ.",
+        explanation: "Kantov kategorički imperativ - temelj deontološke etike."
+      }
+    ]
+  }
 ]

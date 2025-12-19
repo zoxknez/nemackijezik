@@ -1392,4 +1392,294 @@ export const b1Lessons: Lesson[] = [
       }
     ]
   },
+  {
+    id: "b1-11",
+    title: "Mediji i vesti",
+    titleDe: "Medien und Nachrichten",
+    description: "Novine, TV, društvene mreže, fake news.",
+    level: "B1",
+    unit: 3,
+    order: 11,
+    duration: 45,
+    xpReward: 110,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Vrste medija", "Indirektan govor", "Nachdem + Plusquamperfekt"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "b1-11-learn-1",
+        type: "learn-card",
+        question: "Vrste medija",
+        questionDe: "die Zeitung, das Fernsehen, die sozialen Medien",
+        explanation: "Die Zeitung = novine, das Fernsehen = televizija, der Rundfunk = radio, die sozialen Medien = društvene mreže, die Nachrichten = vesti, der Artikel = članak, die Schlagzeile = naslov.",
+        correctAnswer: "continue",
+        audioText: "die Zeitung, das Fernsehen, die sozialen Medien, die Nachrichten",
+        color: "blue"
+      },
+      {
+        id: "b1-11-learn-2",
+        type: "learn-card",
+        question: "Nachdem + Plusquamperfekt",
+        questionDe: "Nachdem ich gegessen hatte, ging ich spazieren.",
+        explanation: "NACHDEM (nakon što) + PLUSQUAMPERFEKT (predprošlo vreme): Nachdem ich gegessen HATTE, ging ich... Plusquamperfekt = hatte/war + Partizip II. Koristi se za radnju koja se desila PRE druge radnje u prošlosti.",
+        correctAnswer: "continue",
+        audioText: "Nachdem ich gegessen hatte, ging ich spazieren.",
+        color: "green"
+      },
+      {
+        id: "b1-11-flash-1",
+        type: "flashcard",
+        question: "Fake News",
+        questionDe: "die Falschmeldung, überprüfen, kritisch denken",
+        explanation: "Die Falschmeldung = lažna vest, überprüfen = proveriti, die Quelle = izvor, kritisch denken = kritički razmišljati, verbreiten = širiti, glaubwürdig = verodostojan.",
+        correctAnswer: "continue",
+        audioText: "die Falschmeldung, die Quelle überprüfen, kritisch denken"
+      },
+      // Practice Phase
+      {
+        id: "b1-11-ex1",
+        type: "matching",
+        question: "Poveži medijske pojmove.",
+        pairs: [
+          { de: "die Schlagzeile", sr: "naslov" },
+          { de: "der Artikel", sr: "članak" },
+          { de: "die Quelle", sr: "izvor" },
+          { de: "die Sendung", sr: "emisija" },
+          { de: "der Journalist", sr: "novinar" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Osnovni medijski vokabular."
+      },
+      {
+        id: "b1-11-ex2",
+        type: "fill-blank",
+        question: "Nachdem ich die Nachrichten gesehen ___, ging ich schlafen. (haben)",
+        correctAnswer: "hatte",
+        hint: "Plusquamperfekt",
+        explanation: "Nachdem + hatte gesehen (plusquamperfekt) + ging (preterit)."
+      },
+      {
+        id: "b1-11-ex3",
+        type: "multiple-choice",
+        question: "Wo liest man aktuelle Nachrichten?",
+        options: ["In der Zeitung und online", "Im Supermarkt", "In der Schule", "Im Park"],
+        correctAnswer: "In der Zeitung und online",
+        explanation: "Novine i internet su glavni izvori vesti."
+      },
+      {
+        id: "b1-11-ex4",
+        type: "matching",
+        question: "Poveži društvene mreže.",
+        pairs: [
+          { de: "teilen", sr: "podeliti" },
+          { de: "liken", sr: "lajkovati" },
+          { de: "kommentieren", sr: "komentarisati" },
+          { de: "posten", sr: "objaviti" },
+          { de: "folgen", sr: "pratiti" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Glagoli za društvene mreže."
+      },
+      {
+        id: "b1-11-ex5",
+        type: "translation",
+        question: "Prevedi: 'Nakon što sam pročitao članak, pozvao sam prijatelja.'",
+        correctAnswer: ["Nachdem ich den Artikel gelesen hatte, rief ich meinen Freund an", "Nachdem ich den Artikel gelesen hatte, habe ich meinen Freund angerufen"],
+        explanation: "Nachdem ich gelesen hatte (plusquamperfekt), rief ich an (preterit)."
+      },
+      {
+        id: "b1-11-ex6",
+        type: "fill-blank",
+        question: "Man sollte immer die ___ überprüfen. (izvor)",
+        correctAnswer: "Quelle",
+        explanation: "Die Quelle = izvor informacija. Važno za borbu protiv fake news."
+      },
+      {
+        id: "b1-11-ex7",
+        type: "multiple-choice",
+        question: "Was ist eine Falschmeldung?",
+        options: ["Eine falsche Nachricht", "Ein guter Artikel", "Eine wahre Geschichte", "Ein Buch"],
+        correctAnswer: "Eine falsche Nachricht",
+        explanation: "Die Falschmeldung = fake news = lažna vest."
+      },
+      {
+        id: "b1-11-ex8",
+        type: "matching",
+        question: "Poveži veznici vremena.",
+        pairs: [
+          { de: "nachdem", sr: "nakon što" },
+          { de: "bevor", sr: "pre nego što" },
+          { de: "während", sr: "dok" },
+          { de: "sobald", sr: "čim" },
+          { de: "seit/seitdem", sr: "otkako" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Temporalni veznici."
+      },
+      {
+        id: "b1-11-ex9",
+        type: "fill-blank",
+        question: "Die ___ über das Konzert war sehr positiv. (izveštaj/kritika)",
+        correctAnswer: "Berichterstattung",
+        hint: "Ili: Kritik",
+        explanation: "Die Berichterstattung = izveštavanje, die Kritik = kritika/recenzija."
+      },
+      {
+        id: "b1-11-ex10",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Nachdem ich die Schlagzeilen gelesen hatte, wollte ich mehr über das Thema erfahren.",
+        options: ["Nakon što sam pročitao naslove, hteo sam da saznam više o temi.", "Pre nego što sam pročitao naslove, znao sam sve.", "Dok sam čitao naslove, zaspao sam.", "Nisam čitao naslove."],
+        correctAnswer: "Nakon što sam pročitao naslove, hteo sam da saznam više o temi.",
+        explanation: "Die Schlagzeile = naslov. Erfahren = saznati."
+      }
+    ]
+  },
+  {
+    id: "b1-12",
+    title: "Bankarski poslovi",
+    titleDe: "Bankgeschäfte",
+    description: "Račun, prekovremeni kredit, platne kartice, uplata.",
+    level: "B1",
+    unit: 3,
+    order: 12,
+    duration: 40,
+    xpReward: 105,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Banke i novac", "Prijevremes složene imenice", "Würde-Konjunktiv"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "b1-12-learn-1",
+        type: "learn-card",
+        question: "Bankarski pojmovi",
+        questionDe: "das Konto, die Überweisung, abheben",
+        explanation: "Das Konto = račun, die Überweisung = prenos/uplata, abheben = podići (novac), einzahlen = uplatiti, die EC-Karte = debitna kartica, die Kreditkarte = kreditna kartica, der Geldautomat = bankomat.",
+        correctAnswer: "continue",
+        audioText: "das Konto, die Überweisung, Geld abheben, einzahlen",
+        color: "purple"
+      },
+      {
+        id: "b1-12-learn-2",
+        type: "learn-card",
+        question: "Složene imenice",
+        questionDe: "Geld + Automat = Geldautomat",
+        explanation: "Nemačke složene imenice: ZADNJA REČ određuje ROD! Der Automat + das Geld = der GeldAUTOMAT (muški!). Das Haus + die Tür = die HausTÜR (ženski!). Često ima spojna slova: -s-, -n-, -en-.",
+        correctAnswer: "continue",
+        audioText: "der Geldautomat, die Haustür, das Bankkonto",
+        color: "blue"
+      },
+      {
+        id: "b1-12-flash-1",
+        type: "flashcard",
+        question: "Würde-Konjunktiv",
+        questionDe: "Ich würde gern ein Konto eröffnen.",
+        explanation: "Za učtive zahteve i želje: würde + INFINITIV. Ich würde gern... = Želeo bih rado... Würdest du...? = Da li bi ti...? Würden Sie...? = Da li biste Vi...? (formalno)",
+        correctAnswer: "continue",
+        audioText: "Ich würde gern ein Konto eröffnen. Würden Sie mir helfen?"
+      },
+      // Practice Phase
+      {
+        id: "b1-12-ex1",
+        type: "matching",
+        question: "Poveži bankarske pojmove.",
+        pairs: [
+          { de: "das Konto", sr: "račun" },
+          { de: "die Überweisung", sr: "prenos" },
+          { de: "abheben", sr: "podići novac" },
+          { de: "einzahlen", sr: "uplatiti" },
+          { de: "der Geldautomat", sr: "bankomat" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Osnovni bankarski vokabular."
+      },
+      {
+        id: "b1-12-ex2",
+        type: "fill-blank",
+        question: "Ich ___ gern 100 Euro abheben. (hteti - würde)",
+        correctAnswer: "würde",
+        hint: "Würde-Konjunktiv",
+        explanation: "Ich würde gern... = Želeo bih rado..."
+      },
+      {
+        id: "b1-12-ex3",
+        type: "multiple-choice",
+        question: "Wo kann man Geld abheben?",
+        options: ["Am Geldautomaten", "Im Restaurant", "Im Park", "Im Kino"],
+        correctAnswer: "Am Geldautomaten",
+        explanation: "Der Geldautomat = bankomat/ATM."
+      },
+      {
+        id: "b1-12-ex4",
+        type: "matching",
+        question: "Poveži složene imenice sa rodom.",
+        pairs: [
+          { de: "der Geldautomat", sr: "bankomat (m)" },
+          { de: "die Bankkarte", sr: "bankovna kartica (ž)" },
+          { de: "das Bankkonto", sr: "bankovni račun (sr)" },
+          { de: "die Überweisung", sr: "prenos (ž)" },
+          { de: "der Kontostand", sr: "stanje računa (m)" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Rod određuje POSLEDNJA reč!"
+      },
+      {
+        id: "b1-12-ex5",
+        type: "translation",
+        question: "Prevedi: 'Želeo bih da otvorim račun.'",
+        correctAnswer: ["Ich würde gern ein Konto eröffnen", "Ich möchte ein Konto eröffnen"],
+        explanation: "Eröffnen = otvoriti (račun, radnju). Würde gern ili möchte."
+      },
+      {
+        id: "b1-12-ex6",
+        type: "fill-blank",
+        question: "Die ___ dauert 1-2 Tage. (prenos novca)",
+        correctAnswer: "Überweisung",
+        explanation: "Die Überweisung = prenos/transakcija novca."
+      },
+      {
+        id: "b1-12-ex7",
+        type: "multiple-choice",
+        question: "Koji je rod reči 'Geldautomat'?",
+        options: ["der", "die", "das"],
+        correctAnswer: "der",
+        explanation: "Geld (das) + Automat (DER) = DER Geldautomat. Zadnja reč određuje rod!"
+      },
+      {
+        id: "b1-12-ex8",
+        type: "matching",
+        question: "Poveži finansijske glagole.",
+        pairs: [
+          { de: "sparen", sr: "štedeti" },
+          { de: "ausgeben", sr: "trošiti" },
+          { de: "verdienen", sr: "zarađivati" },
+          { de: "überweisen", sr: "prebaciti/preneti" },
+          { de: "leihen", sr: "pozajmiti" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Glagoli za finansijske transakcije."
+      },
+      {
+        id: "b1-12-ex9",
+        type: "fill-blank",
+        question: "___ Sie mir bitte helfen? (formalno - da li biste)",
+        correctAnswer: "Würden",
+        hint: "Würde-Konjunktiv za Sie",
+        explanation: "Würden Sie...? = Da li biste Vi...? (učtivo)"
+      },
+      {
+        id: "b1-12-ex10",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Ich möchte 200 Euro von meinem Konto abheben und auf ein anderes Konto überweisen.",
+        options: ["Želim podići 200 evra sa računa i preneti na drugi račun.", "Želim otvoriti novi račun.", "Želim zatvoriti račun.", "Trebam novu karticu."],
+        correctAnswer: "Želim podići 200 evra sa računa i preneti na drugi račun.",
+        explanation: "Abheben = podići, überweisen = preneti."
+      }
+    ]
+  }
 ]

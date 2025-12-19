@@ -1,6 +1,8 @@
 import { Sidebar } from "@/components/layout/sidebar"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import { ToastContainer } from "@/components/ui/toast"
+import { PWAInstallPrompt } from "@/components/pwa/PWAInstallPrompt"
+import { OfflineIndicator } from "@/components/pwa/OfflineIndicator"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 
@@ -41,6 +43,8 @@ export default async function DashboardLayout({
       </main>
       <MobileNav />
       <ToastContainer />
+      <PWAInstallPrompt />
+      <OfflineIndicator />
     </div>
   )
 }

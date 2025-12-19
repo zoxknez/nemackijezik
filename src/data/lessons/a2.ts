@@ -1463,4 +1463,280 @@ export const a2Lessons: Lesson[] = [
       }
     ]
   },
+  {
+    id: "a2-11",
+    title: "U restoranu",
+    titleDe: "Im Restaurant",
+    description: "Naručivanje hrane, platiti, tip, rezervacija.",
+    level: "A2",
+    unit: 3,
+    order: 11,
+    duration: 35,
+    xpReward: 85,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Meni", "Ich hätte gern", "Trinkgeld", "Platiti"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "a2-11-learn-1",
+        type: "learn-card",
+        question: "U restoranu",
+        questionDe: "die Speisekarte, bestellen, zahlen",
+        explanation: "Die Speisekarte = jelovnik, bestellen = naručiti, zahlen/bezahlen = platiti, das Trinkgeld = napojnica, die Rechnung = račun. Ich hätte gern... = Imao bih rado...",
+        correctAnswer: "continue",
+        audioText: "die Speisekarte, bestellen, zahlen, das Trinkgeld",
+        color: "orange"
+      },
+      {
+        id: "a2-11-learn-2",
+        type: "learn-card",
+        question: "Naručivanje hrane",
+        questionDe: "Ich hätte gern... / Ich nehme...",
+        explanation: "Za naručivanje: 'Ich hätte gern...' (Imao bih rado...) ili 'Ich nehme...' (Uzeću...). 'Ich möchte bestellen' = želeo bih da naručim. Guter Appetit! = Prijatno!",
+        correctAnswer: "continue",
+        audioText: "Ich hätte gern ein Schnitzel. Ich nehme die Suppe.",
+        color: "green"
+      },
+      {
+        id: "a2-11-flash-1",
+        type: "flashcard",
+        question: "Platiti račun",
+        questionDe: "Zahlen bitte! / Die Rechnung bitte!",
+        explanation: "Kad želiš račun: 'Die Rechnung, bitte!' ili 'Zahlen, bitte!'. Zusammen oder getrennt? = Zajedno ili odvojeno? Das macht... Euro = To čini... evra.",
+        correctAnswer: "continue",
+        audioText: "Die Rechnung, bitte! Zusammen oder getrennt?"
+      },
+      // Practice Phase
+      {
+        id: "a2-11-ex1",
+        type: "matching",
+        question: "Poveži fraze iz restorana.",
+        pairs: [
+          { de: "die Speisekarte", sr: "jelovnik" },
+          { de: "die Rechnung", sr: "račun" },
+          { de: "das Trinkgeld", sr: "napojnica" },
+          { de: "bestellen", sr: "naručiti" },
+          { de: "zahlen", sr: "platiti" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Osnove reči za restoran."
+      },
+      {
+        id: "a2-11-ex2",
+        type: "multiple-choice",
+        question: "Kako naručiš hranu?",
+        questionDe: "Wie bestellst du Essen?",
+        options: ["Ich hätte gern ein Schnitzel", "Ich bin ein Schnitzel", "Ich esse kein Schnitzel", "Wo ist das Schnitzel"],
+        correctAnswer: "Ich hätte gern ein Schnitzel",
+        explanation: "'Ich hätte gern...' je učtiv način za naručivanje."
+      },
+      {
+        id: "a2-11-ex3",
+        type: "fill-blank",
+        question: "Ich ___ die Rechnung, bitte. (hteti)",
+        correctAnswer: "hätte",
+        hint: "Ich hätte gern...",
+        explanation: "Ich hätte die Rechnung = Hteo/la bih račun."
+      },
+      {
+        id: "a2-11-ex4",
+        type: "translation",
+        question: "Prevedi: 'Dobar tek!'",
+        correctAnswer: ["Guten Appetit", "Guten Appetit!"],
+        explanation: "Guten Appetit! = Prijatno! / Dobar tek!"
+      },
+      {
+        id: "a2-11-ex5",
+        type: "matching",
+        question: "Poveži jela.",
+        pairs: [
+          { de: "die Suppe", sr: "supa/čorba" },
+          { de: "das Schnitzel", sr: "šnicla" },
+          { de: "die Pommes (frites)", sr: "pomfrit" },
+          { de: "der Salat", sr: "salata" },
+          { de: "das Dessert", sr: "desert" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Popularna jela u nemačkim restoranima."
+      },
+      {
+        id: "a2-11-ex6",
+        type: "multiple-choice",
+        question: "Was möchten Sie trinken?",
+        options: ["Ein Glas Wasser, bitte", "Ich esse Wasser", "Wasser ist hier", "Nein, danke"],
+        correctAnswer: "Ein Glas Wasser, bitte",
+        explanation: "Ein Glas Wasser = čaša vode."
+      },
+      {
+        id: "a2-11-ex7",
+        type: "fill-blank",
+        question: "Zusammen oder ___? (odvojeno)",
+        correctAnswer: "getrennt",
+        explanation: "Zusammen oder getrennt? = Zajedno ili odvojeno (kada plaćate)?"
+      },
+      {
+        id: "a2-11-ex8",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Guten Tag! Haben Sie reserviert? Für zwei Personen? Folgen Sie mir bitte.",
+        options: ["Dobar dan! Imate li rezervaciju? Za dve osobe? Pratite me molim.", "Dobar dan! Imate li meni? Za tri osobe? Ovde molim.", "Dobro veče! Šta želite? Supa ili salata?", "Prijatno! Evo račun."],
+        correctAnswer: "Dobar dan! Imate li rezervaciju? Za dve osobe? Pratite me molim.",
+        explanation: "Reservieren = rezervisati. Für zwei Personen = za dve osobe."
+      },
+      {
+        id: "a2-11-ex9",
+        type: "translation",
+        question: "Prevedi: 'Može li meni, molim?'",
+        correctAnswer: ["Die Speisekarte, bitte", "Die Karte, bitte"],
+        explanation: "Die Speisekarte/Die Karte = meni/jelovnik."
+      },
+      {
+        id: "a2-11-ex10",
+        type: "fill-blank",
+        question: "Das macht ___ Euro. (dvadeset tri)",
+        correctAnswer: "dreiundzwanzig",
+        explanation: "23 = dreiundzwanzig (tri-i-dvadeset)."
+      }
+    ]
+  },
+  {
+    id: "a2-12",
+    title: "Kod lekara",
+    titleDe: "Beim Arzt",
+    description: "Kako opisati simptome, delovi tela, lekovi.",
+    level: "A2",
+    unit: 3,
+    order: 12,
+    duration: 35,
+    xpReward: 85,
+    isLocked: true,
+    isCompleted: false,
+    progress: 0,
+    topics: ["Simptomi", "Delovi tela", "Mir tut...weh", "Medikamente"],
+    exercises: [
+      // Learning Phase
+      {
+        id: "a2-12-learn-1",
+        type: "learn-card",
+        question: "Kod lekara",
+        questionDe: "der Arzt, die Ärztin, der Termin",
+        explanation: "Der Arzt = lekar (muški), die Ärztin = lekarka (ženski), der Termin = zakazan termin, die Sprechstunde = ordinacija/vreme za pacijente, das Rezept = recept.",
+        correctAnswer: "continue",
+        audioText: "der Arzt, die Ärztin, der Termin, das Rezept",
+        color: "red"
+      },
+      {
+        id: "a2-12-learn-2",
+        type: "learn-card",
+        question: "Mir tut...weh",
+        questionDe: "Mir tut der Kopf weh. Mir tun die Beine weh.",
+        explanation: "Za bol koristimo: Mir tut...weh (jednina) ili Mir tun...weh (množina). Der Kopf = glava → Mir tut der Kopf weh (Boli me glava). Die Beine = noge → Mir tun die Beine weh (Bole me noge).",
+        correctAnswer: "continue",
+        audioText: "Mir tut der Kopf weh. Mir tun die Beine weh.",
+        color: "blue"
+      },
+      {
+        id: "a2-12-flash-1",
+        type: "flashcard",
+        question: "Simptomi",
+        questionDe: "das Fieber, der Husten, die Erkältung",
+        explanation: "Das Fieber = temperatura, der Husten = kašalj, die Erkältung = prehlada, der Schnupfen = curenje nosa, die Grippe = grip, die Kopfschmerzen = glavobolja (množina!).",
+        correctAnswer: "continue",
+        audioText: "das Fieber, der Husten, die Erkältung, die Kopfschmerzen"
+      },
+      // Practice Phase
+      {
+        id: "a2-12-ex1",
+        type: "matching",
+        question: "Poveži delove tela.",
+        pairs: [
+          { de: "der Kopf", sr: "glava" },
+          { de: "der Bauch", sr: "stomak" },
+          { de: "der Rücken", sr: "leđa" },
+          { de: "das Bein", sr: "noga" },
+          { de: "der Arm", sr: "ruka" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Osnovni delovi tela."
+      },
+      {
+        id: "a2-12-ex2",
+        type: "fill-blank",
+        question: "Mir tut der Hals ___. (boleti)",
+        correctAnswer: "weh",
+        hint: "Weh tun",
+        explanation: "Der Hals = grlo. Mir tut der Hals weh = Boli me grlo."
+      },
+      {
+        id: "a2-12-ex3",
+        type: "multiple-choice",
+        question: "Wie heißt 'temperatura' na nemačkom?",
+        options: ["Das Fieber", "Der Husten", "Die Erkältung", "Der Schnupfen"],
+        correctAnswer: "Das Fieber",
+        explanation: "Das Fieber = temperatura. Ich habe Fieber = Imam temperaturu."
+      },
+      {
+        id: "a2-12-ex4",
+        type: "translation",
+        question: "Prevedi: 'Bole me noge.'",
+        correctAnswer: ["Mir tun die Beine weh", "Mir tun die Beine weh."],
+        explanation: "Die Beine (množina) → Mir tun die Beine weh."
+      },
+      {
+        id: "a2-12-ex5",
+        type: "matching",
+        question: "Poveži simptome.",
+        pairs: [
+          { de: "der Husten", sr: "kašalj" },
+          { de: "der Schnupfen", sr: "curenje nosa" },
+          { de: "die Kopfschmerzen", sr: "glavobolja" },
+          { de: "die Bauchschmerzen", sr: "bol u stomaku" },
+          { de: "die Grippe", sr: "grip" }
+        ],
+        correctAnswer: "matching-check",
+        explanation: "Često čovršni simptomi."
+      },
+      {
+        id: "a2-12-ex6",
+        type: "fill-blank",
+        question: "Ich habe eine ___. Meine Nase läuft. (prehlada)",
+        correctAnswer: "Erkältung",
+        explanation: "Die Erkältung = prehlada. Ich bin erkältet = Prehladio/la sam se."
+      },
+      {
+        id: "a2-12-ex7",
+        type: "multiple-choice",
+        question: "Kako kažeš da imaš temperaturu?",
+        options: ["Ich habe Fieber", "Ich bin Fieber", "Mir tut Fieber weh", "Mein Fieber ist"],
+        correctAnswer: "Ich habe Fieber",
+        explanation: "Ich habe Fieber = Imam temperaturu."
+      },
+      {
+        id: "a2-12-ex8",
+        type: "listening",
+        question: "Šta čuješ?",
+        audioText: "Guten Tag, Frau Müller. Was fehlt Ihnen? Mir tut der Rücken weh und ich habe Kopfschmerzen.",
+        options: ["Dobar dan, gospođo Miler. Šta vam je? Bole me leđa i imam glavobolju.", "Dobar dan. Kako ste? Dobro sam, hvala.", "Dobro veče. Imam temperaturu i kašalj.", "Zdravo. Trebaš recept?"],
+        correctAnswer: "Dobar dan, gospođo Miler. Šta vam je? Bole me leđa i imam glavobolju.",
+        explanation: "Was fehlt Ihnen? = Šta vam je? (formalno)"
+      },
+      {
+        id: "a2-12-ex9",
+        type: "translation",
+        question: "Prevedi: 'Trebam recept.'",
+        correctAnswer: ["Ich brauche ein Rezept", "Ich brauche ein Rezept."],
+        explanation: "Das Rezept = recept (za lekove)."
+      },
+      {
+        id: "a2-12-ex10",
+        type: "fill-blank",
+        question: "Nehmen Sie diese ___ dreimal täglich. (lekovi)",
+        correctAnswer: "Medikamente",
+        hint: "Množina",
+        explanation: "Die Medikamente = lekovi. Dreimal täglich = tri puta dnevno."
+      }
+    ]
+  }
 ]

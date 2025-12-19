@@ -1,10 +1,13 @@
-import { auth } from "@/lib/auth"
+"use client"
+
+import { useState } from "react"
 import { Header } from "@/components/layout/header"
 import { GlassCard } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { DashboardBackground } from "@/components/background"
 import { LevelBadge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { LearningAnalyticsDashboard } from "@/components/profile/LearningAnalytics"
 import Link from "next/link"
 import {
   Calendar,
@@ -31,7 +34,6 @@ import {
   MessageSquare,
   GraduationCap
 } from "lucide-react"
-import type { ExtendedUser } from "@/types"
 
 // Simulirani podaci za profil
 const userStats = {
@@ -88,14 +90,97 @@ const recentActivity = [
   { type: "achievement", title: "Dostignuće: Feuerteufel", xp: 100, time: "Juče" },
 ]
 
-export default async function ProfilePage() {
-  const session = await auth()
-  const user = session?.user as ExtendedUser | undefined
-
+export default function ProfilePage() {
+  const [activeTab, setActiveTab] = useState<"overview" | "analytics">("overview")
+  
+  // Mock user data
+  const user = {
+    name: "Korisnik",
+    email: "korisnik@example.com",
+    level: "A2" as const
+  }
+  
   const joinDate = "Januar 2024"
   const location = "Beograd, Srbija"
   
   const levelProgress = (userStats.totalXP / userStats.nextLevelXP) * 100
+
+  // Analytics data
+  const analyticsData = {
+    totalStudyTime: 1475, // 24h 35m in minutes
+    averageSessionTime: 28,
+    totalXP: 4850,
+    weeklyXP: 850,
+    monthlyXP: 3200,
+    lessonsCompleted: 32,
+    totalLessons: 50,
+    vocabularyLearned: 456,
+    exercisesCompleted: 187,
+    averageAccuracy: 87,
+    strongestSkill: "Čitanje (Reading)",
+    weakestSkill: "Govor (Speaking)",
+    studyStreak: 7,
+    longestStreak: 14,
+    lastActive: "Pre 2 sata"
+  }
+
+  const skillsData = [
+    {
+      name: "Čitanje",
+      level: 7,
+      progress: 72,
+      totalExercises: 45,
+      accuracy: 89,
+      timeSpent: 8,
+      icon: BookOpen,
+      color: "blue",
+      trend: "up" as const
+    },
+    {
+      name: "Slušanje",
+      level: 6,
+      progress: 58,
+      totalExercises: 32,
+      accuracy: 84,
+      timeSpent: 6,
+      icon: Headphones,
+      color: "purple",
+      trend: "up" as const
+    },
+    {
+      name: "Pisanje",
+      level: 5,
+      progress: 45,
+      totalExercises: 28,
+      accuracy: 78,
+      timeSpent: 5,
+      icon: PenTool,
+      color: "green",
+      trend: "stable" as const
+    },
+    {
+      name: "Govor",
+      level: 4,
+      progress: 38,
+      totalExercises: 18,
+      accuracy: 71,
+      timeSpent: 3,
+      icon: MessageSquare,
+      color: "orange",
+      trend: "down" as const
+    },
+    {
+      name: "Gramatika",
+      level: 6,
+      progress: 65,
+      totalExercises: 38,
+      accuracy: 92,
+      timeSpent: 7,
+      icon: Brain,
+      color: "red",
+      trend: "up" as const
+    },
+  ]
 
   return (
     <>
@@ -123,7 +208,7 @@ export default async function ProfilePage() {
                   </span>
                 </div>
                 <div className="absolute -bottom-2 -right-2 rounded-full bg-background p-1.5 ring-2 ring-german-gold/50">
-                  <LevelBadge level={(user?.level as "A1" | "A2" | "B1" | "B2" | "C1" | "C2") || "A2"} />
+                  <LevelBadge level={user?.level || "A2"} />
                 </div>
                 {/* Streak Badge */}
                 <div className="absolute -top-2 -right-2 flex items-center gap-1 rounded-full bg-orange-500/90 px-2 py-1 text-xs font-bold text-white shadow-lg">
@@ -184,6 +269,38 @@ export default async function ProfilePage() {
               </div>
             </div>
           </GlassCard>
+
+          {/* Tab Navigation */}
+          <GlassCard className="p-2">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab("overview")}
+                className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                  activeTab === "overview"
+                    ? "bg-german-gold text-black"
+                    : "text-muted-foreground hover:bg-white/5"
+                }`}
+              >
+                <Trophy className="inline h-4 w-4 mr-2" />
+                Pregled
+              </button>
+              <button
+                onClick={() => setActiveTab("analytics")}
+                className={`flex-1 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                  activeTab === "analytics"
+                    ? "bg-german-gold text-black"
+                    : "text-muted-foreground hover:bg-white/5"
+                }`}
+              >
+                <BarChart3 className="inline h-4 w-4 mr-2" />
+                Detaljne Analitike
+              </button>
+            </div>
+          </GlassCard>
+
+          {/* Tab Content */}
+          {activeTab === "overview" ? (
+            <>
 
           {/* Stats Grid */}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -425,6 +542,14 @@ export default async function ProfilePage() {
               Odjavi se
             </Button>
           </div>
+          </>
+          ) : (
+            // Analytics Tab
+            <LearningAnalyticsDashboard 
+              analytics={analyticsData}
+              skillsData={skillsData}
+            />
+          )}
         </div>
       </main>
     </>

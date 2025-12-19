@@ -7,7 +7,17 @@ import {
   Volume2, 
   BookOpen,
   Clock,
-  TrendingUp
+  TrendingUp,
+  Download,
+  Upload,
+  Plus,
+  Tag,
+  Link,
+  FileText,
+  BarChart3,
+  Filter,
+  BookMarked,
+  Dumbbell
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -15,6 +25,8 @@ import { GlassCard } from "@/components/ui/card"
 import { LevelBadge } from "@/components/ui/badge"
 import { vocabulary, type VocabularyWord, type Level } from "@/data/vocabulary"
 import { cn } from "@/lib/utils"
+import { VocabularyExercises } from "@/components/vocabulary/VocabularyExercises"
+import { VocabularyStats } from "@/components/vocabulary/VocabularyStats"
 
 // Simulated learned words data (in production, this would come from database)
 const learnedWordsData: Record<string, { 
@@ -34,8 +46,9 @@ vocabulary.slice(0, 30).forEach((word, i) => {
   }
 })
 
-type SortOption = "alphabetical" | "mastery" | "recent" | "level"
+type SortOption = "alphabetical" | "mastery" | "recent" | "level" | "partOfSpeech"
 type FilterOption = "all" | "learning" | "mastered" | "weak"
+type PartOfSpeechFilter = "all" | "noun" | "verb" | "adjective" | "adverb" | "preposition" | "conjunction"
 
 export default function RecnikPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -43,6 +56,17 @@ export default function RecnikPage() {
   const [sortBy, setSortBy] = useState<SortOption>("alphabetical")
   const [filterBy, setFilterBy] = useState<FilterOption>("all")
   const [selectedWord, setSelectedWord] = useState<VocabularyWord | null>(null)
+  const [partOfSpeechFilter, setPartOfSpeechFilter] = useState<PartOfSpeechFilter>("all")
+  const [customLists, setCustomLists] = useState<Record<string, string[]>>({
+    "Omiljene": [],
+    "Za ispit": [],
+    "Teške reči": []
+  })
+  const [selectedList, setSelectedList] = useState<string | null>(null)
+  const [showCreateList, setShowCreateList] = useState(false)
+  const [newListName, setNewListName] = useState("")
+  const [showExerciseMode, setShowExerciseMode] = useState(false)
+  const [showStats, setShowStats] = useState(false)
 
   // Get learned words with their data
   const learnedWords = useMemo(() => {
@@ -71,6 +95,18 @@ export default function RecnikPage() {
       result = result.filter(word => word.level === selectedLevel)
     }
 
+    // Part of speech filter
+    if (partOfSpeechFilter !== "all") {
+      result = result.filter(word => 
+        word.partOfSpeech?.toLowerCase() === partOfSpeechFilter
+      )
+    }
+
+    // Custom list filter
+    if (selectedList && customLists[selectedList]) {
+      result = result.filter(word => customLists[selectedList].includes(word.id))
+    }
+
     // Status filter
     if (filterBy === "mastered") {
       result = result.filter(word => word.masteryLevel >= 80)
@@ -94,6 +130,9 @@ export default function RecnikPage() {
       case "level":
         const levelOrder = ["A1", "A2", "B1", "B2", "C1", "C2"]
         result.sort((a, b) => levelOrder.indexOf(a.level) - levelOrder.indexOf(b.level))
+        break
+      case "partOfSpeech":
+        result.sort((a, b) => (a.partOfSpeech || "").localeCompare(b.partOfSpeech || ""))
         break
     }
 
@@ -134,21 +173,107 @@ export default function RecnikPage() {
     return "bg-red-500"
   }
 
+  const createCustomList = () => {
+    if (newListName.trim() && !customLists[newListName]) {
+      setCustomLists({ ...customLists, [newListName]: [] })
+      setNewListName("")
+      setShowCreateList(false)
+    }
+  }
+
+  const toggleWordInList = (listName: string, wordId: string) => {
+    const list = customLists[listName] || []
+    const newList = list.includes(wordId)
+      ? list.filter(id => id !== wordId)
+      : [...list, wordId]
+    setCustomLists({ ...customLists, [listName]: newList })
+  }
+
+  const exportVocabulary = () => {
+    const data = JSON.stringify({
+      words: filteredWords.map(w => ({
+        german: w.german,
+        serbian: w.serbian,
+        article: w.article,
+        level: w.level,
+        partOfSpeech: w.partOfSpeech,
+        example: w.example,
+        masteryLevel: w.masteryLevel
+      })),
+      customLists,
+      exportDate: new Date().toISOString()
+    }, null, 2)
+    
+    const blob = new Blob([data], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `recnik-${new Date().toISOString().split('T')[0]}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const getPartOfSpeechLabel = (pos: string) => {
+    const labels: Record<string, string> = {
+      noun: "Imenica",
+      verb: "Glagol",
+      adjective: "Pridev",
+      adverb: "Prilog",
+      preposition: "Predlog",
+      conjunction: "Veznik"
+    }
+    return labels[pos] || pos
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-          <BookOpen className="h-8 w-8 text-german-gold" />
-          Moj Rečnik
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          Sve reči koje si naučio/la na jednom mestu
-        </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+            <BookOpen className="h-8 w-8 text-german-gold" />
+            Moj Rečnik
+          </h1>
+          <p className="text-muted-foreground mt-1">
+            Sve reči koje si naučio/la na jednom mestu
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowStats(!showStats)}
+            className="border-german-gold/30 hover:bg-german-gold/10"
+          >
+            <BarChart3 className="h-4 w-4 mr-2" />
+            Statistika
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowExerciseMode(true)}
+            className="border-german-gold/30 hover:bg-german-gold/10"
+          >
+            <Dumbbell className="h-4 w-4 mr-2" />
+            Vežbaj
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={exportVocabulary}
+            className="border-german-gold/30 hover:bg-german-gold/10"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Export
+          </Button>
+        </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      {showStats ? (
+        <VocabularyStats words={learnedWords} />
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <GlassCard className="p-4 text-center">
           <div className="text-3xl font-bold text-white">{stats.total}</div>
           <div className="text-sm text-muted-foreground">Ukupno reči</div>
@@ -170,6 +295,67 @@ export default function RecnikPage() {
           <div className="text-sm text-muted-foreground">Prosek</div>
         </GlassCard>
       </div>
+      )}
+
+      {/* Custom Lists */}
+      <GlassCard className="p-4">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+            <BookMarked className="h-4 w-4 text-german-gold" />
+            Moje Liste
+          </h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowCreateList(!showCreateList)}
+            className="h-7 text-xs"
+          >
+            <Plus className="h-3 w-3 mr-1" />
+            Nova lista
+          </Button>
+        </div>
+        {showCreateList && (
+          <div className="flex gap-2 mb-3">
+            <Input
+              placeholder="Naziv liste..."
+              value={newListName}
+              onChange={(e) => setNewListName(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && createCustomList()}
+              className="bg-white/5 border-white/10 h-8 text-sm"
+            />
+            <Button size="sm" onClick={createCustomList} className="h-8">
+              Dodaj
+            </Button>
+          </div>
+        )}
+        <div className="flex flex-wrap gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setSelectedList(null)}
+            className={cn(
+              "h-8 text-xs",
+              !selectedList && "bg-german-gold text-black"
+            )}
+          >
+            Sve reči
+          </Button>
+          {Object.entries(customLists).map(([listName, words]) => (
+            <Button
+              key={listName}
+              variant="ghost"
+              size="sm"
+              onClick={() => setSelectedList(selectedList === listName ? null : listName)}
+              className={cn(
+                "h-8 text-xs",
+                selectedList === listName && "bg-german-gold text-black"
+              )}
+            >
+              {listName} ({words.length})
+            </Button>
+          ))}
+        </div>
+      </GlassCard>
 
       {/* Filters */}
       <GlassCard className="p-4">
@@ -217,6 +403,21 @@ export default function RecnikPage() {
             <option value="weak">Slabo (&lt;30%)</option>
           </select>
 
+          {/* Part of Speech Filter */}
+          <select
+            value={partOfSpeechFilter}
+            onChange={(e) => setPartOfSpeechFilter(e.target.value as PartOfSpeechFilter)}
+            className="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm"
+          >
+            <option value="all">Sve vrste</option>
+            <option value="noun">Imenice</option>
+            <option value="verb">Glagoli</option>
+            <option value="adjective">Pridevi</option>
+            <option value="adverb">Prilozi</option>
+            <option value="preposition">Predlozi</option>
+            <option value="conjunction">Veznici</option>
+          </select>
+
           {/* Sort */}
           <select
             value={sortBy}
@@ -227,6 +428,7 @@ export default function RecnikPage() {
             <option value="mastery">Po savladanosti</option>
             <option value="recent">Nedavno vežbano</option>
             <option value="level">Po nivou</option>
+            <option value="partOfSpeech">Po vrsti reči</option>
           </select>
         </div>
       </GlassCard>
@@ -279,6 +481,11 @@ export default function RecnikPage() {
                       >
                         <Volume2 className="h-4 w-4 text-german-gold" />
                       </Button>
+                      {word.partOfSpeech && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300">
+                          {getPartOfSpeechLabel(word.partOfSpeech)}
+                        </span>
+                      )}
                     </div>
                     <div className="text-muted-foreground">{word.serbian}</div>
                   </div>
@@ -346,6 +553,100 @@ export default function RecnikPage() {
                         )}
                       </div>
                     </div>
+                    
+                    {/* Related Words, Synonyms, Antonyms */}
+                    {(word.synonyms || word.antonyms || word.relatedWords) && (
+                      <div className="mt-4 pt-4 border-t border-white/10 space-y-3">
+                        {word.synonyms && word.synonyms.length > 0 && (
+                          <div>
+                            <h4 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+                              <Link className="h-4 w-4 text-green-400" />
+                              Sinonimi
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {word.synonyms.map((syn, idx) => (
+                                <span key={idx} className="px-2 py-1 rounded-md bg-green-500/10 text-green-300 text-xs border border-green-500/20">
+                                  {syn}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {word.antonyms && word.antonyms.length > 0 && (
+                          <div>
+                            <h4 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+                              <Link className="h-4 w-4 text-red-400" />
+                              Antonimi
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {word.antonyms.map((ant, idx) => (
+                                <span key={idx} className="px-2 py-1 rounded-md bg-red-500/10 text-red-300 text-xs border border-red-500/20">
+                                  {ant}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {word.relatedWords && word.relatedWords.length > 0 && (
+                          <div>
+                            <h4 className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+                              <Link className="h-4 w-4 text-blue-400" />
+                              Povezane reči
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {word.relatedWords.map((rel, idx) => (
+                                <span key={idx} className="px-2 py-1 rounded-md bg-blue-500/10 text-blue-300 text-xs border border-blue-500/20">
+                                  {rel}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Notes */}
+                    {word.notes && (
+                      <div className="mt-4 pt-4 border-t border-white/10">
+                        <div className="flex items-start gap-2 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+                          <FileText className="h-4 w-4 text-yellow-400 mt-0.5" />
+                          <div>
+                            <h4 className="text-sm font-medium text-yellow-300 mb-1">Napomena</h4>
+                            <p className="text-sm text-yellow-200/80">{word.notes}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="mt-4 pt-4 border-t border-white/10">
+                      <h4 className="text-sm font-medium text-white mb-2 flex items-center gap-2">
+                        <Tag className="h-4 w-4 text-german-gold" />
+                        Dodaj u listu
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {Object.entries(customLists).map(([listName, words]) => {
+                          const isInList = words.includes(word.id)
+                          return (
+                            <Button
+                              key={listName}
+                              variant="ghost"
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                toggleWordInList(listName, word.id)
+                              }}
+                              className={cn(
+                                "h-7 text-xs",
+                                isInList ? "bg-german-gold text-black" : "border border-white/20"
+                              )}
+                            >
+                              {isInList && <Check className="h-3 w-3 mr-1" />}
+                              {listName}
+                            </Button>
+                          )
+                        })}
+                      </div>
+                    </div>
                   </motion.div>
                 )}
               </GlassCard>
@@ -358,6 +659,14 @@ export default function RecnikPage() {
       <div className="text-center text-muted-foreground text-sm">
         Prikazano {filteredWords.length} od {learnedWords.length} naučenih reči
       </div>
+
+      {/* Exercise Mode Modal */}
+      {showExerciseMode && (
+        <VocabularyExercises
+          words={filteredWords}
+          onClose={() => setShowExerciseMode(false)}
+        />
+      )}
     </div>
   )
 }
